@@ -5,7 +5,7 @@
       <h1 class="title">PetMe</h1>
       <h2 class="subtitle">We pet you</h2>
       <div class="links">
-        <a href="/" class="button--green"> Je suis adoptant </a>
+        <a href="/signupAdopt" class="button--green"> Je suis adoptant </a>
         <a href="/" class="button--grey"> Je suis un refuge </a>
       </div>
     </div>
