@@ -1,6 +1,6 @@
 const express = require('express')
 
-const calculatorRoutes = require('./routes/calculator.routes')
+const adoptantRoutes = require('./routes/adoptants.routes')
 
 const app = express()
 app.use(express.json())
@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   })
 })
 
-app.use('/calculator', calculatorRoutes)
+app.use('/adoptants', adoptantRoutes)
 
 app.get(
   '/secret/:key',

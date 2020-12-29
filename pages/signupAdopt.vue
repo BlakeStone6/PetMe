@@ -1,26 +1,26 @@
 <template>
   <div>
     <h1>S'enregistrer en tant qu'adoptant</h1>
-    <form method="post">
+    <form @submit.prevent="onSubmit">
       <label>
         Nom:
-        <vs-input type="text" v-model="nom" />
+        <vs-input v-model="nom" type="text" />
       </label>
       <label>
         Prénom:
-        <vs-input type="text" v-model="prenom" />
+        <vs-input v-model="prenom" type="text" />
       </label>
       <label>
         Email:
-        <vs-input type="email" v-model="email" />
+        <vs-input v-model="email" type="email" />
       </label>
       <label>
         Téléphone:
-        <vs-input type="tel" v-model="tel" />
+        <vs-input v-model="telephone" type="tel" />
       </label>
       <label>
         Mot de passe:
-        <vs-input type="password" v-model="password" />
+        <vs-input v-model="password" type="password" />
       </label>
       <label>
         Confirmer le mot de passe:
@@ -28,7 +28,7 @@
       </label>
       <label>
         Type d'habitation:
-        <vs-select placeholder="Choisir..." v-model="habitation">
+        <vs-select v-model="habitation" placeholder="Choisir...">
           <vs-option label="Appartement" value="appartement">
             Appartement
           </vs-option>
@@ -42,8 +42,8 @@
         </vs-select>
       </label>
       <label>
-        Animaux présents (même espàce que celui que vous voulez adopter?):
-        <vs-select placeholder="Choisir..." v-model="animauxPresents">
+        Animaux présents (même espèce que celui que vous voulez adopter?):
+        <vs-select v-model="animauxPresents" placeholder="Choisir...">
           <vs-option label="Non" value="non"> Non </vs-option>
           <vs-option label="Oui, même espèce" value="oui same">
             Oui, même espèce
@@ -55,7 +55,7 @@
       </label>
       <label>
         Nombre d'enfants:
-        <vs-input type="number" v-model="nbEnfants" />
+        <vs-input v-model.number="nbEnfants" type="number" />
       </label>
       <label>
         Expérience avec les animaux:
@@ -67,6 +67,7 @@
       </label>
       <vs-input type="submit" value="Continuer" />
     </form>
+    <p>{{ bio }}</p>
   </div>
 </template>
 
@@ -76,13 +77,25 @@ export default {
     nom: '',
     prenom: '',
     email: '',
-    tel: '',
+    telephone: '',
     password: '',
     habitation: '',
     animauxPresents: '',
-    nbEnfants: '',
+    nbEnfants: 0,
     experience: '',
     bio: '',
   }),
+
+  methods: {
+    onSubmit() {
+      this.$axios
+        .post('/api/adoptants/addAdoptant', {
+          ...this._data,
+          nbEnfants: this.nbEnfants,
+        })
+        .then((data) => console.log(data))
+        .catch((err) => console.error(err))
+    },
+  },
 }
 </script>
