@@ -10,7 +10,7 @@ PetMe est une application web progressive (PWA) qui permet aux utilisateurs de c
 - [Vue.js](https://vuejs.org/) - Framework (front-end)
 - [Nuxt.js](https://fr.nuxtjs.org/) - Framework (basé sur Vue.js)
 - [Vuesax](https://vuesax.com/) - UI Framework
-- [Firebase](https://firebase.google.com/docs) - Base de données
+- [Airtable](https://https://airtable.com/) - Base de données
 - [Visual Studio Code](https://code.visualstudio.com/) - Environnement de développement
 
 ## Fonctionnement

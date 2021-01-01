@@ -59,15 +59,14 @@
       </label>
       <label>
         Expérience avec les animaux:
-        <textarea />
+        <textarea v-model="experience" />
       </label>
       <label>
         Bio:
-        <textarea />
+        <textarea v-model="bio" />
       </label>
       <vs-input type="submit" value="Continuer" />
     </form>
-    <p>{{ bio }}</p>
   </div>
 </template>
 
@@ -91,9 +90,11 @@ export default {
       this.$axios
         .post('/api/adoptants/addAdoptant', {
           ...this._data,
-          nbEnfants: this.nbEnfants,
         })
-        .then((data) => console.log(data))
+        .then(
+          (response) =>
+            (window.location.href = '/adoptants/' + response.data.id)
+        )
         .catch((err) => console.error(err))
     },
   },
