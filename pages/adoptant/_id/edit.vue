@@ -1,26 +1,26 @@
 <template>
   <div>
-    <h1>S'enregistrer en tant qu'adoptant</h1>
+    <h1>Edit user {{ user.data.prenom }} {{ user.data.nom }}</h1>
     <form @submit.prevent="onSubmit">
       <label>
         Nom:
-        <vs-input v-model="nom" type="text" />
+        <vs-input v-model="user.data.nom" type="text" />
       </label>
       <label>
         Prénom:
-        <vs-input v-model="prenom" type="text" />
+        <vs-input v-model="user.data.prenom" type="text" />
       </label>
       <label>
         Email:
-        <vs-input v-model="email" type="email" />
+        <vs-input v-model="user.data.email" type="email" />
       </label>
       <label>
         Téléphone:
-        <vs-input v-model="telephone" type="tel" />
+        <vs-input v-model="user.data.telephone" type="tel" />
       </label>
       <label>
         Mot de passe:
-        <vs-input v-model="password" type="password" />
+        <vs-input v-model="user.data.password" type="password" />
       </label>
       <label>
         Confirmer le mot de passe:
@@ -28,7 +28,7 @@
       </label>
       <label>
         Type d'habitation:
-        <vs-select v-model="habitation" placeholder="Choisir...">
+        <vs-select v-model="user.data.habitation" placeholder="Choisir...">
           <vs-option label="Appartement" value="appartement">
             Appartement
           </vs-option>
@@ -43,7 +43,7 @@
       </label>
       <label>
         Animaux présents (même espèce que celui que vous voulez adopter?):
-        <vs-select v-model="animauxPresents" placeholder="Choisir...">
+        <vs-select v-model="user.data.animauxPresents" placeholder="Choisir...">
           <vs-option label="Non" value="non"> Non </vs-option>
           <vs-option label="Oui, même espèce" value="oui same">
             Oui, même espèce
@@ -55,15 +55,15 @@
       </label>
       <label>
         Nombre d'enfants:
-        <vs-input v-model.number="nbEnfants" type="number" />
+        <vs-input v-model.number="user.data.nbEnfants" type="number" />
       </label>
       <label>
         Expérience avec les animaux:
-        <textarea v-model="experience" />
+        <textarea v-model="user.data.experience" />
       </label>
       <label>
         Bio:
-        <textarea v-model="bio" />
+        <textarea v-model="user.data.bio" />
       </label>
       <vs-input type="submit" value="Continuer" />
     </form>
@@ -72,31 +72,28 @@
 
 <script>
 export default {
-  data: () => ({
-    nom: '',
-    prenom: '',
-    email: '',
-    telephone: '',
-    password: '',
-    habitation: '',
-    animauxPresents: '',
-    nbEnfants: 0,
-    experience: '',
-    bio: '',
-  }),
+  async asyncData({ params, $axios }) {
+    // console.log(params)
+    const user = await $axios.$get(`/adoptant/${params.id}`)
+    // console.log(user)
+    return { user }
+  },
 
   methods: {
     onSubmit() {
       this.$axios
-        .post('/api/adoptants/addAdoptant', {
-          ...this._data,
+        .put(`/adoptant/${this.$route.params.id}`, {
+          ...this._data.user.data,
         })
         .then(
-          (response) =>
-            (window.location.href = '/adoptants/' + response.data.id)
+          (response) => (window.location.href = '/adoptant/' + response.data.id)
         )
         .catch((err) => console.error(err))
+
+      // console.log(this._data)
     },
   },
 }
 </script>
+
+<style></style>

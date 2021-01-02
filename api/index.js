@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   })
 })
 
-app.use('/adoptants', adoptantRoutes)
+app.use('/adoptant', adoptantRoutes)
 
 app.get(
   '/secret/:key',
