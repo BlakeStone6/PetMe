@@ -1,15 +1,52 @@
 const router = require('express').Router()
+const argon2 = require('argon2')
+const jwt = require('jsonwebtoken')
 const db = require('../db/connection')
 
-router.get('/', (req, res) => {
-  return res.status(200).json({
-    message: 'Hello, world!',
-  })
+router.post('/login', (req, res) => {
+  console.log(`got to love ya `)
+  db('adoptants')
+    .select({
+      view: 'Grid view',
+      filterByFormula: `{email} = '${req.body.email}'`,
+    })
+    .firstPage(async function (err, records) {
+      if (err) {
+        return res.status(500).json({
+          message: 'not ok',
+          err,
+        })
+      }
+      const userInDb = records[0]
+      try {
+        if (await argon2.verify(userInDb.fields.password, req.body.password)) {
+          return res.status(200).json({
+            message: 'ok',
+            token: jwt.sign(
+              {
+                sub: userInDb.id,
+              },
+              process.env.JWT_SECRET
+            ),
+          })
+        } else {
+          return res.status(401).json({
+            message: 'no',
+          })
+        }
+      } catch (err) {
+        // internal failure
+        console.error(err)
+        return res.status(500).json({
+          message: 'not ok',
+          err,
+        })
+      }
+    })
 })
 
-router.post('/addAdoptant', (req, res) => {
-  // console.log('REQ BODY TOP', req.body)
-
+router.post('/register', async (req, res) => {
+  req.body.password = await argon2.hash(req.body.password)
   db('adoptants').create(
     [
       {
@@ -43,7 +80,7 @@ router.get('/:id', (req, res) => {
         message: 'Unable to fetch user',
       })
     }
-    console.log('Retrieved', record.id)
+    console.log('Retrieved', record.fields)
     return res.status(200).json({
       message: 'Retrieved user',
       id: record.id,

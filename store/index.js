@@ -1,3 +1,3 @@
 export const state = () => ({
-  authenticated: false,
+  loggedIn: false,
 })

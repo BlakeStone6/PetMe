@@ -26,6 +26,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    // .env
+    '@nuxtjs/dotenv',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -44,17 +46,6 @@ export default {
   },
 
   // Auth configuration
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
-          logout: false,
-        },
-      },
-    },
-  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
@@ -69,4 +60,30 @@ export default {
       handler: '~/api/index.js',
     },
   ],
+
+  auth: {
+    strategies: {
+      adoptantStrategy: {
+        scheme: 'local',
+        token: {
+          property: 'token',
+          // required: true,
+          // type: 'Bearer',
+        },
+        user: {
+          property: 'sub',
+          // autoFetch: true,
+        },
+        endpoints: {
+          login: { url: '/api/adoptant/login', method: 'post' },
+          logout: { url: '/api/adoptant/logout', method: 'post' },
+          user: { url: '/api/adoptant/', method: 'get' },
+        },
+      },
+    },
+  },
+
+  env: {
+    jwtSecret: process.env.JWT_SECRET,
+  },
 }

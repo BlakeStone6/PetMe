@@ -3,10 +3,10 @@
     <div>
       <header></header>
       <h1 class="title">PetMe</h1>
-      <h2 class="subtitle">We pet you</h2>
+      <h2 class="subtitle">Connexion</h2>
       <div class="links">
-        <a href="/loginAdopt" class="button--green"> Je suis adoptant </a>
-        <a href="/" class="button--grey"> Je suis un refuge </a>
+        <a href="/login/adoptant" class="button--green"> Je suis adoptant </a>
+        <a href="/login/refuge" class="button--grey"> Je suis un refuge </a>
       </div>
     </div>
   </div>
