@@ -7,25 +7,22 @@
   >
     <vs-card type="1">
       <template #title>
-        <h3 class="cardTitle">{{ card.keyword }}</h3>
+        <h3 class="cardTitle">{{ card.fields.nom }}</h3>
       </template>
       <template #img>
-        <img
-          src="xoxo_cute__Puppy__Dog__animal__pets__Cute_dogs_Cute_animals_.jpg"
-          alt=""
-        />
+        <img :src="card.fields.image[0].url" alt="" />
       </template>
       <template #text>
-        <p>bio ici</p>
+        <p>{{ card.fields.description }}</p>
       </template>
       <template #interactions>
-        <vs-button danger icon circle size="xl">
+        <vs-button danger icon circle size="xl" @click="onRejectClick">
           <i class="bx bx-x"></i>
         </vs-button>
         <vs-button warning icon circle size="xl">
           <i class="bx bx-expand-alt"></i>
         </vs-button>
-        <vs-button success icon circle size="xl">
+        <vs-button success icon circle size="xl" @click="onAcceptClick">
           <i class="bx bx-heart"></i>
         </vs-button>
       </template>
@@ -128,6 +125,16 @@ export default {
         this.isShowing = false
         this.$emit('hideCard', this.card)
       }, 300)
+    },
+
+    onAcceptClick() {
+      this.isInteractAnimating = true
+      this.playCard(ACCEPT_CARD)
+    },
+
+    onRejectClick() {
+      this.isInteractAnimating = true
+      this.playCard(REJECT_CARD)
     },
 
     playCard(interaction) {
@@ -236,6 +243,10 @@ $fs-card-title: 1.125em;
   &.isAnimating {
     transition: transform 0.7s $ease-out-back;
   }
+}
+
+vs-card {
+  height: 100%;
 }
 
 .cardTitle {

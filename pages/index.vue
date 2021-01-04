@@ -19,26 +19,14 @@
 import PetCardStack from '@/components/PetCardStack.vue'
 
 export default {
-  middleware: 'is-refuge',
+  middleware: ['is-refuge', 'user'],
   components: { PetCardStack },
 
-  data: () => ({
-    visibleCards: [
-      {
-        keyword: 'ok',
-      },
-      {
-        keyword: 'no',
-      },
-      {
-        keyword: 'maybe',
-      },
-
-      {
-        keyword: 'perhaps',
-      },
-    ],
-  }),
+  async asyncData({ params, $axios }) {
+    const list = await $axios.$get('/animaux/')
+    const visibleCards = list.animaux
+    return { visibleCards }
+  },
   methods: {
     async logout() {
       await this.$auth.logout()
@@ -52,7 +40,6 @@ export default {
     },
     removeCardFromDeck() {
       this.visibleCards.shift()
-      console.log('new card: ', this.visibleCards[0].keyword)
     },
     printStack() {},
   },

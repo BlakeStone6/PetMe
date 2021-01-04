@@ -27,8 +27,6 @@ export default {
   },
   mounted() {
     this.isThisUser = this.$auth.user === this.$route.params.id
-    console.log(this.$auth.user)
-    console.log(this.isThisUser)
   },
   methods: {
     async logout() {

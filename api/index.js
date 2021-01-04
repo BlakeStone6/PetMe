@@ -3,6 +3,7 @@ const express = require('express')
 const auth = require('./routes/auth')
 const adoptantRoutes = require('./routes/adoptants.routes')
 const refugeRoutes = require('./routes/refuges.routes')
+const animauxRoutes = require('./routes/animaux.routes')
 
 const app = express()
 app.use(express.json())
@@ -17,5 +18,6 @@ app.get('/', (req, res) => {
 app.use('/auth', auth)
 app.use('/adoptant', adoptantRoutes)
 app.use('/refuge', refugeRoutes)
+app.use('/animaux', animauxRoutes)
 
 module.exports = app
