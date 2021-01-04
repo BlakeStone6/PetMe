@@ -79,6 +79,7 @@ export default {
         endpoints: {
           login: { url: '/auth/adoptant/login', method: 'post' },
           logout: { url: '/auth/adoptant/logout', method: 'post' },
+          user: false,
         },
       },
       refugeStrategy: {
@@ -96,6 +97,7 @@ export default {
         endpoints: {
           login: { url: '/auth/refuge/login', method: 'post' },
           logout: { url: '/auth/refuge/logout', method: 'post' },
+          user: false,
         },
       },
     },

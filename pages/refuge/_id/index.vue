@@ -5,12 +5,17 @@
     <p v-for="(animal, index) in animaux" :key="index">
       {{ animal.fields.nom }}
     </p>
-    <nuxt-link :to="$route.params.id + '/edit'">Edit</nuxt-link>
+    <nuxt-link v-if="isThisUser" :to="$route.params.id + '/edit'"
+      >Edit</nuxt-link
+    >
+    <vs-button type="border" @click="logout">Logout</vs-button>
   </div>
 </template>
 
 <script>
 export default {
+  middleware: 'user',
+  data: () => ({ isThisUser: false }),
   async asyncData({ params, $axios }) {
     const animaux = []
     const user = await $axios.$get(`/refuge/${params.id}`)
@@ -19,6 +24,17 @@ export default {
       animaux.push(pet.record)
     })
     return { user, animaux }
+  },
+  mounted() {
+    this.isThisUser = this.$auth.user === this.$route.params.id
+    console.log(this.$auth.user)
+    console.log(this.isThisUser)
+  },
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+      window.location.reload(true)
+    },
   },
 }
 </script>

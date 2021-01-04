@@ -10,7 +10,6 @@
         @cardRejected="handleCardRejected"
         @hideCard="removeCardFromDeck"
       />
-      <vs-button type="filled" danger @click="printStack"> test </vs-button>
     </div>
     <vs-button type="flat" @click="logout">Log out</vs-button>
   </div>
