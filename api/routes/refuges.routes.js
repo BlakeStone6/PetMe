@@ -56,13 +56,11 @@ router.get('/:id/animal/:animalId', (req, res) => {
 
 router.put('/:id', (req, res) => {
   db('refuges').update(
-    [
-      {
-        id: req.params.id,
-        fields: req.body,
-      },
-    ],
-    function (err, records) {
+    {
+      id: req.params.id,
+      fields: req.body,
+    },
+    function (err, record) {
       if (err) {
         // eslint-disable-next-line no-console
         console.error(err)
@@ -70,12 +68,9 @@ router.put('/:id', (req, res) => {
           message: 'Unable to edit user',
         })
       }
-      records.forEach(function (record) {
-        return res.status(200).json({
-          message: 'Retrieved user',
-          id: record.id,
-          data: record.fields,
-        })
+      return res.status(200).json({
+        message: 'Edited user',
+        id: record.id,
       })
     }
   )

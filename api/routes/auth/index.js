@@ -121,12 +121,10 @@ router.post('/refuge/login', (req, res) => {
 router.post('/adoptant/register', async (req, res) => {
   req.body.password = await argon2.hash(req.body.password)
   db('adoptants').create(
-    [
-      {
-        fields: req.body,
-      },
-    ],
-    function (err, records) {
+    {
+      fields: req.body,
+    },
+    function (err, record) {
       if (err) {
         // eslint-disable-next-line no-console
         console.error(err)
@@ -134,11 +132,9 @@ router.post('/adoptant/register', async (req, res) => {
           message: 'Unable to create user',
         })
       }
-      records.forEach(function (record) {
-        return res.status(200).json({
-          message: 'Successfully created user',
-          id: record.id,
-        })
+      return res.status(200).json({
+        message: 'Successfully created user',
+        id: record.id,
       })
     }
   )
@@ -147,12 +143,10 @@ router.post('/adoptant/register', async (req, res) => {
 router.post('/refuge/register', async (req, res) => {
   req.body.password = await argon2.hash(req.body.password)
   db('refuges').create(
-    [
-      {
-        fields: req.body,
-      },
-    ],
-    function (err, records) {
+    {
+      fields: req.body,
+    },
+    function (err, record) {
       if (err) {
         // eslint-disable-next-line no-console
         console.error(err)
@@ -160,11 +154,9 @@ router.post('/refuge/register', async (req, res) => {
           message: 'Unable to create user',
         })
       }
-      records.forEach(function (record) {
-        return res.status(200).json({
-          message: 'Successfully created user',
-          id: record.id,
-        })
+      return res.status(200).json({
+        message: 'Successfully created user',
+        id: record.id,
       })
     }
   )

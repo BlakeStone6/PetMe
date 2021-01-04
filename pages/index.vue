@@ -5,7 +5,7 @@
         <h1 class="title">PetMe</h1>
         <h2 class="subtitle">We pet you</h2>
       </header>
-      <p v-if="$fetchState.pending">Fetching pets...</p>
+      <div v-if="$fetchState.pending" ref="loading"></div>
       <p v-else-if="$fetchState.error">An error occurred :(</p>
       <div>
         <PetCardStack
@@ -26,34 +26,37 @@ import PetCardStack from '@/components/PetCardStack.vue'
 export default {
   middleware: ['is-refuge', 'user'],
   components: { PetCardStack },
+
+  async fetch() {
+    const loading = this.$vs.loading({
+      target: this.$refs.loading,
+      opacity: 1,
+      color: '#fc0384',
+      text: 'Loading...',
+    })
+    const list = await this.$axios.$get(`/animaux/${this.$auth.user}`)
+    this.visibleCards = list.animaux
+    loading.close()
+  },
   data: () => ({
     visibleCards: [],
   }),
-
-  async fetch() {
-    const list = await this.$axios.$get(`/animaux/${this.$auth.user}`)
-    this.visibleCards = list.animaux
-  },
   methods: {
     async logout() {
       await this.$auth.logout()
       window.location.reload(true)
     },
     async handleCardAccepted() {
-      console.log('accepted card ', this.visibleCards[0].fields.nom)
-      const like = await this.$axios.post('/animaux/like', {
-        userId: this.$auth.id,
+      await this.$axios.post('/animaux/like', {
+        userId: this.$auth.user,
         petId: this.visibleCards[0].id,
       })
-      console.log(like.data.message)
     },
     async handleCardRejected() {
-      console.log('handleCardRejected')
-      const skip = await this.$axios.post('/animaux/skip', {
-        userId: this.$auth.id,
+      await this.$axios.post('/animaux/reject', {
+        userId: this.$auth.user,
         petId: this.visibleCards[0].id,
       })
-      console.log(skip.data.message)
     },
     removeCardFromDeck() {
       this.visibleCards.shift()

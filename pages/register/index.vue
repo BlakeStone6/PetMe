@@ -5,13 +5,15 @@
       <h1 class="title">PetMe</h1>
       <h2 class="subtitle">S'enregistrer</h2>
       <div class="links">
-        <a href="/register/adoptant" class="button--green">
+        <nuxt-link to="/register/adoptant" class="button--green">
           Je suis adoptant
-        </a>
-        <a href="/register/refuge" class="button--grey"> Je suis un refuge </a>
+        </nuxt-link>
+        <nuxt-link to="/register/refuge" class="button--grey">
+          Je suis un refuge
+        </nuxt-link>
       </div>
     </div>
-    <div><a></a></div>
+    <div><nuxt-link to="/login">J'ai déjà un compte</nuxt-link></div>
   </div>
 </template>
 

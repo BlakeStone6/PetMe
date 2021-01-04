@@ -6,11 +6,15 @@
       </header>
       <h2 class="subtitle">Connexion</h2>
       <div class="links">
-        <a href="/login/adoptant" class="button--green"> Je suis adoptant </a>
-        <a href="/login/refuge" class="button--grey"> Je suis un refuge </a>
+        <nuxt-link to="/login/adoptant" class="button--green">
+          Je suis adoptant
+        </nuxt-link>
+        <nuxt-link to="/login/refuge" class="button--grey">
+          Je suis un refuge
+        </nuxt-link>
       </div>
     </div>
-    <div><a href="/register">S'enregistrer</a></div>
+    <div><nuxt-link to="/register">S'enregistrer</nuxt-link></div>
   </div>
 </template>
 

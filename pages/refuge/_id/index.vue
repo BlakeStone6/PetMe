@@ -1,21 +1,25 @@
 <template>
   <div>
     <h1>{{ user.data.nom }}</h1>
-    <p>{{ $route.params.id }}</p>
-    <p v-for="(animal, index) in animaux" :key="index">
-      {{ animal.fields.nom }}
-    </p>
-    <nuxt-link v-if="isThisUser" :to="$route.params.id + '/edit'"
-      >Edit</nuxt-link
-    >
+    <div class="petList">
+      <h2>Liste des animaux</h2>
+
+      <div v-for="(animal, index) in animaux" :key="index">
+        <PetProfileCard :card="animal" />
+      </div>
+    </div>
+    <nuxt-link v-if="isThisUser" :to="$route.params.id + '/edit'">
+      Edit
+    </nuxt-link>
     <vs-button type="border" @click="logout">Logout</vs-button>
   </div>
 </template>
 
 <script>
+import PetProfileCard from '~/components/PetProfileCard.vue'
 export default {
+  components: { PetProfileCard },
   middleware: 'user',
-  data: () => ({ isThisUser: false }),
   async asyncData({ params, $axios }) {
     const animaux = []
     const user = await $axios.$get(`/refuge/${params.id}`)
@@ -25,6 +29,7 @@ export default {
     })
     return { user, animaux }
   },
+  data: () => ({ isThisUser: false }),
   mounted() {
     this.isThisUser = this.$auth.user === this.$route.params.id
   },

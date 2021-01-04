@@ -10,7 +10,10 @@
         <h3 class="cardTitle">{{ card.fields.nom }}</h3>
       </template>
       <template #img>
-        <img :src="card.fields.image[0].url" alt="" />
+        <img
+          :src="card.fields.image[0].url"
+          :alt="'Profil de ' + card.fields.nom"
+        />
       </template>
       <template #text>
         <p>{{ card.fields.description }}</p>
