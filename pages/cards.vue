@@ -1,25 +1,52 @@
 <template>
-  <pet-card-stack :cards="visibleCards" />
+  <div id="app">
+    <GameCardsStack
+      :cards="visibleCards"
+      @cardAccepted="handleCardAccepted"
+      @cardRejected="handleCardRejected"
+      @cardSkipped="handleCardSkipped"
+      @hideCard="removeCardFromDeck"
+    />
+  </div>
 </template>
 
 <script>
-import PetCardStack from '~/components/PetCardStack.vue'
+import GameCardsStack from '@/components/GameCardsStack'
+
 export default {
-  auth: false,
+  name: 'App',
+  components: {
+    GameCardsStack,
+  },
 
-  components: { PetCardStack },
+  data() {
+    return {
+      visibleCards: ['Test', 'Vue.js', 'Webpack'],
+    }
+  },
 
-  data: () => ({
-    visibleCards: [
-      {
-        keyword: 'ok',
-      },
-      {
-        keyword: 'no',
-      },
-    ],
-  }),
+  methods: {
+    handleCardAccepted() {
+      console.log('handleCardAccepted')
+    },
+    handleCardRejected() {
+      console.log('handleCardRejected')
+    },
+    handleCardSkipped() {
+      console.log('handleCardSkipped')
+    },
+    removeCardFromDeck() {
+      this.visibleCards.shift()
+    },
+  },
 }
 </script>
 
-<style></style>
+<style lang="scss">
+@import './styles/mixins.scss';
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+</style>

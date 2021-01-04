@@ -35,7 +35,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://auth.nuxtjs.org
-    '@nuxtjs/auth',
+    '@nuxtjs/auth-next',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
   ],
@@ -45,13 +45,13 @@ export default {
     baseURL: 'http://localhost:3000/api',
   },
 
-  // Auth configuration
-
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
-
-  router: {
-    middleware: ['auth'],
+  build: {
+    extend(config, { isDev, isClient }) {
+      config.node = {
+        fs: 'empty',
+      }
+    },
   },
 
   serverMiddleware: [
@@ -61,23 +61,41 @@ export default {
     },
   ],
 
+  // Auth configuration
   auth: {
     strategies: {
       adoptantStrategy: {
         scheme: 'local',
         token: {
           property: 'token',
-          // required: true,
-          // type: 'Bearer',
+          required: true,
+          type: 'Bearer',
+          maxAge: 3600,
         },
         user: {
-          property: 'sub',
-          // autoFetch: true,
+          property: 'user',
+          autoFetch: false,
         },
         endpoints: {
-          login: { url: '/api/adoptant/login', method: 'post' },
-          logout: { url: '/api/adoptant/logout', method: 'post' },
-          user: { url: '/api/adoptant/', method: 'get' },
+          login: { url: '/auth/adoptant/login', method: 'post' },
+          logout: { url: '/auth/adoptant/logout', method: 'post' },
+        },
+      },
+      refugeStrategy: {
+        scheme: 'local',
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+          maxAge: 3600,
+        },
+        user: {
+          property: 'user',
+          autoFetch: false,
+        },
+        endpoints: {
+          login: { url: '/auth/refuge/login', method: 'post' },
+          logout: { url: '/auth/refuge/logout', method: 'post' },
         },
       },
     },
@@ -85,5 +103,9 @@ export default {
 
   env: {
     jwtSecret: process.env.JWT_SECRET,
+  },
+
+  router: {
+    middleware: ['auth'],
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Se connecter en tant qu'adoptant</h1>
+    <h1>Se connecter en tant que refuge</h1>
     <div>
       <form @submit.prevent="onLogin">
         <label>
@@ -15,7 +15,7 @@
       </form>
       <p>
         Pas de compte ?
-        <nuxt-link to="../register/adoptant">S'enregistrer</nuxt-link>
+        <nuxt-link to="../register/refuge">S'enregistrer</nuxt-link>
       </p>
     </div>
   </div>
@@ -26,15 +26,15 @@ import jwtDecode from 'jwt-decode'
 export default {
   auth: 'guest',
   data: () => ({
-    email: 'getintherobot@shin.ji',
-    password: 'no',
+    email: 'potizanimo@gmail.co',
+    password: 'popop',
   }),
 
   methods: {
     async onLogin() {
       try {
         this.$auth.reset()
-        const response = await this.$auth.loginWith('adoptantStrategy', {
+        const response = await this.$auth.loginWith('refugeStrategy', {
           data: this._data,
         })
         const token = jwtDecode(response.data.token)

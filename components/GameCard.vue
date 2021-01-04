@@ -1,35 +1,15 @@
 <template>
   <div
+    v-if="isShowing"
     ref="interactElement"
+    :class="{
+      isAnimating: isInteractAnimating,
+      isCurrent: isCurrent,
+    }"
     class="card"
-    :class="{ isCurrent: isCurrent }"
     :style="{ transform: transformString }"
   >
-    <vs-card type="1">
-      <template #title>
-        <h3 class="cardTitle">{{ card.keyword }}</h3>
-      </template>
-      <template #img>
-        <img
-          src="xoxo_cute__Puppy__Dog__animal__pets__Cute_dogs_Cute_animals_.jpg"
-          alt=""
-        />
-      </template>
-      <template #text>
-        <p>bio ici</p>
-      </template>
-      <template #interactions>
-        <vs-button danger icon circle size="xl">
-          <i class="bx bx-x"></i>
-        </vs-button>
-        <vs-button warning icon circle size="xl">
-          <i class="bx bx-expand-alt"></i>
-        </vs-button>
-        <vs-button success icon circle size="xl">
-          <i class="bx bx-heart"></i>
-        </vs-button>
-      </template>
-    </vs-card>
+    <h3 class="cardTitle">{{ card }}</h3>
   </div>
 </template>
 
@@ -50,7 +30,7 @@ export default {
 
   props: {
     card: {
-      type: Object,
+      type: String,
       required: true,
     },
     isCurrent: {
@@ -184,11 +164,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/index.scss';
-@import 'https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css';
 
 $cardsTotal: 3;
 $cardsWidth: 300px;
-$cardsPositionOffset: 35vh * 0.06;
+$cardsPositionOffset: 55vh * 0.06;
 $cardsScaleOffset: 0.08;
 $defaultTranslation: $cardsPositionOffset * $cardsTotal;
 $defaultScale: 1 - ($cardsScaleOffset * $cardsTotal);
@@ -197,6 +176,7 @@ $fs-card-title: 1.125em;
 .card {
   @include card();
   @include absolute(0);
+  @include sizing(100% 80vw);
   @include flex-center();
 
   @include after() {

@@ -1,27 +1,83 @@
 <template>
   <div class="container">
-    <div>
+    <div class="app">
       <header></header>
       <h1 class="title">PetMe</h1>
       <h2 class="subtitle">We pet you</h2>
+      <PetCardStack
+        :cards="visibleCards"
+        @cardAccepted="handleCardAccepted"
+        @cardRejected="handleCardRejected"
+        @hideCard="removeCardFromDeck"
+      />
+      <vs-button type="filled" danger @click="printStack"> test </vs-button>
     </div>
+    <vs-button type="flat" @click="logout">Log out</vs-button>
   </div>
 </template>
 
 <script>
+import PetCardStack from '@/components/PetCardStack.vue'
+
 export default {
-  components: {},
+  middleware: 'is-refuge',
+  components: { PetCardStack },
+
+  data: () => ({
+    visibleCards: [
+      {
+        keyword: 'ok',
+      },
+      {
+        keyword: 'no',
+      },
+      {
+        keyword: 'maybe',
+      },
+
+      {
+        keyword: 'perhaps',
+      },
+    ],
+  }),
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+      window.location.reload(true)
+    },
+    handleCardAccepted() {
+      console.log('accepted card ', this.visibleCards[0].keyword)
+    },
+    handleCardRejected() {
+      console.log('handleCardRejected')
+    },
+    removeCardFromDeck() {
+      this.visibleCards.shift()
+      console.log('new card: ', this.visibleCards[0].keyword)
+    },
+    printStack() {},
+  },
 }
 </script>
 
+<style lang="scss">
+@import './styles/mixins.scss';
+</style>
+
 <style>
 .container {
+  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.app {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
 .title {

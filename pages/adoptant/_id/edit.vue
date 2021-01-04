@@ -88,6 +88,7 @@ export default {
         .then(
           (response) => (window.location.href = '/adoptant/' + response.data.id)
         )
+        // eslint-disable-next-line no-console
         .catch((err) => console.error(err))
 
       // console.log(this._data)

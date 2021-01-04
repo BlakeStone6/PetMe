@@ -1,22 +1,23 @@
 <template>
   <div class="container">
     <div>
-      <header>
-        <h1 class="title">PetMe</h1>
-      </header>
-      <h2 class="subtitle">Connexion</h2>
+      <header></header>
+      <h1 class="title">PetMe</h1>
+      <h2 class="subtitle">S'enregistrer</h2>
       <div class="links">
-        <a href="/login/adoptant" class="button--green"> Je suis adoptant </a>
-        <a href="/login/refuge" class="button--grey"> Je suis un refuge </a>
+        <a href="/register/adoptant" class="button--green">
+          Je suis adoptant
+        </a>
+        <a href="/register/refuge" class="button--grey"> Je suis un refuge </a>
       </div>
     </div>
-    <div><a href="/register">S'enregistrer</a></div>
+    <div><a></a></div>
   </div>
 </template>
 
 <script>
 export default {
-  auth: 'guest',
+  auth: false,
   components: {},
 }
 </script>
@@ -58,11 +59,6 @@ export default {
 }
 
 .links {
-  padding-top: 15px;
-  margin-bottom: 20px;
-}
-
-.links::after {
   padding-top: 15px;
   margin-bottom: 20px;
 }

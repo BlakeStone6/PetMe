@@ -9,7 +9,7 @@ router.get('/user', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-  db('adoptants').find(req.params.id, function (err, record) {
+  db('refuges').find(req.params.id, function (err, record) {
     if (err) {
       return res.status(400).json({
         message: 'Unable to fetch user',
@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.get('/:id/edit', (req, res) => {
-  db('adoptants').find(req.params.id, function (err, record) {
+  db('refuges').find(req.params.id, function (err, record) {
     if (err) {
       return res.status(400).json({
         message: 'Unable to fetch user',
@@ -38,8 +38,24 @@ router.get('/:id/edit', (req, res) => {
   })
 })
 
+router.get('/:id/animal/:animalId', (req, res) => {
+  db('animaux').find(req.params.animalId, function (err, record) {
+    if (err) {
+      // eslint-disable-next-line no-console
+      console.error(err)
+      return res.status(500).json({
+        message: 'Database error',
+      })
+    }
+    return res.status(200).json({
+      message: 'Retrieved pet',
+      record,
+    })
+  })
+})
+
 router.put('/:id', (req, res) => {
-  db('adoptants').update(
+  db('refuges').update(
     [
       {
         id: req.params.id,

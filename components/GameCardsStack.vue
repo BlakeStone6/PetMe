@@ -1,6 +1,6 @@
 <template>
   <div class="cards">
-    <PetCard
+    <GameCard
       v-for="(card, index) in cards"
       :key="card"
       :card="card"
@@ -14,11 +14,13 @@
 </template>
 
 <script>
-import PetCard from '@/components/PetCard'
+import GameCard from '@/components/GameCard'
+
 export default {
   components: {
-    PetCard,
+    GameCard,
   },
+
   props: {
     cards: {
       type: Array,
