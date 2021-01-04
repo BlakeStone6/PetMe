@@ -74,7 +74,7 @@
 
 <script>
 export default {
-  auth: 'guest',
+  auth: false,
   data: () => ({
     nom: '',
     prenom: '',
@@ -91,11 +91,11 @@ export default {
   methods: {
     onSignup() {
       this.$axios
-        .post('/adoptant/register', {
+        .post('/refuge/register', {
           ...this._data,
         })
         .then(
-          (response) => (window.location.href = '/adoptant/' + response.data.id)
+          (response) => (window.location.href = '/refuge/' + response.data.id)
         )
         // eslint-disable-next-line no-console
         .catch((err) => console.error(err))

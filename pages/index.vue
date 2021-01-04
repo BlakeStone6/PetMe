@@ -1,15 +1,20 @@
 <template>
   <div class="container">
     <div class="app">
-      <header></header>
-      <h1 class="title">PetMe</h1>
-      <h2 class="subtitle">We pet you</h2>
-      <PetCardStack
-        :cards="visibleCards"
-        @cardAccepted="handleCardAccepted"
-        @cardRejected="handleCardRejected"
-        @hideCard="removeCardFromDeck"
-      />
+      <header>
+        <h1 class="title">PetMe</h1>
+        <h2 class="subtitle">We pet you</h2>
+      </header>
+      <p v-if="$fetchState.pending">Fetching pets...</p>
+      <p v-else-if="$fetchState.error">An error occurred :(</p>
+      <div>
+        <PetCardStack
+          :cards="visibleCards"
+          @cardAccepted="handleCardAccepted"
+          @cardRejected="handleCardRejected"
+          @hideCard="removeCardFromDeck"
+        />
+      </div>
     </div>
     <vs-button type="flat" @click="logout">Log out</vs-button>
   </div>
@@ -21,22 +26,34 @@ import PetCardStack from '@/components/PetCardStack.vue'
 export default {
   middleware: ['is-refuge', 'user'],
   components: { PetCardStack },
+  data: () => ({
+    visibleCards: [],
+  }),
 
-  async asyncData({ params, $axios }) {
-    const list = await $axios.$get('/animaux/')
-    const visibleCards = list.animaux
-    return { visibleCards }
+  async fetch() {
+    const list = await this.$axios.$get(`/animaux/${this.$auth.user}`)
+    this.visibleCards = list.animaux
   },
   methods: {
     async logout() {
       await this.$auth.logout()
       window.location.reload(true)
     },
-    handleCardAccepted() {
-      console.log('accepted card ', this.visibleCards[0].keyword)
+    async handleCardAccepted() {
+      console.log('accepted card ', this.visibleCards[0].fields.nom)
+      const like = await this.$axios.post('/animaux/like', {
+        userId: this.$auth.id,
+        petId: this.visibleCards[0].id,
+      })
+      console.log(like.data.message)
     },
-    handleCardRejected() {
+    async handleCardRejected() {
       console.log('handleCardRejected')
+      const skip = await this.$axios.post('/animaux/skip', {
+        userId: this.$auth.id,
+        petId: this.visibleCards[0].id,
+      })
+      console.log(skip.data.message)
     },
     removeCardFromDeck() {
       this.visibleCards.shift()
@@ -61,7 +78,7 @@ export default {
 }
 
 .app {
-  margin: 0 auto;
+  margin: auto;
   min-height: 100vh;
   display: flex;
 }
@@ -90,11 +107,6 @@ export default {
 .subtitle a {
   font-weight: 500;
   color: inherit;
-}
-
-.links {
-  padding-top: 15px;
-  margin-bottom: 20px;
 }
 
 .content-logos {

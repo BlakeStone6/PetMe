@@ -34,14 +34,11 @@
 const interact = require('interactjs')
 const ACCEPT_CARD = 'cardAccepted'
 const REJECT_CARD = 'cardRejected'
-const SKIP_CARD = 'cardSkipped'
 
 export default {
   static: {
     interactMaxRotation: 15,
     interactOutOfSightXCoordinate: 500,
-    interactOutOfSightYCoordinate: 600,
-    interactYThreshold: 150,
     interactXThreshold: 100,
   },
 
@@ -103,13 +100,12 @@ export default {
       },
 
       onend: () => {
-        const { x, y } = this.interactPosition
-        const { interactXThreshold, interactYThreshold } = this.$options.static
+        const x = this.interactPosition.x
+        const interactXThreshold = this.$options.static.interactXThreshold
         this.isInteractAnimating = true
 
         if (x > interactXThreshold) this.playCard(ACCEPT_CARD)
         else if (x < -interactXThreshold) this.playCard(REJECT_CARD)
-        else if (y > interactYThreshold) this.playCard(SKIP_CARD)
         else this.resetCardPosition()
       },
     })
@@ -140,7 +136,6 @@ export default {
     playCard(interaction) {
       const {
         interactOutOfSightXCoordinate,
-        interactOutOfSightYCoordinate,
         interactMaxRotation,
       } = this.$options.static
 
@@ -160,12 +155,6 @@ export default {
             rotation: -interactMaxRotation,
           })
           this.$emit(REJECT_CARD)
-          break
-        case SKIP_CARD:
-          this.interactSetPosition({
-            y: interactOutOfSightYCoordinate,
-          })
-          this.$emit(SKIP_CARD)
           break
       }
 
