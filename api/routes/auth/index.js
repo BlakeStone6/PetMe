@@ -84,10 +84,11 @@ router.post('/refuge/login', (req, res) => {
         })
       }
       const userInDb = records[0]
-      if (!userInDb)
+      if (!userInDb) {
         return res.status(401).json({
           message: 'Wrong email or password',
         })
+      }
       try {
         if (await argon2.verify(userInDb.fields.password, req.body.password)) {
           return res.status(200).json({
@@ -120,9 +121,30 @@ router.post('/refuge/login', (req, res) => {
 
 router.post('/adoptant/register', async (req, res) => {
   req.body.password = await argon2.hash(req.body.password)
+  const {
+    nom,
+    prenom,
+    email,
+    telephone,
+    password,
+    habitation,
+    animauxPresents,
+    nbEnfants,
+    experience,
+    bio,
+  } = req.body
   db('adoptants').create(
     {
-      fields: req.body,
+      nom,
+      prenom,
+      email,
+      telephone,
+      password,
+      habitation,
+      animauxPresents,
+      nbEnfants,
+      experience,
+      bio,
     },
     function (err, record) {
       if (err) {
@@ -142,9 +164,15 @@ router.post('/adoptant/register', async (req, res) => {
 
 router.post('/refuge/register', async (req, res) => {
   req.body.password = await argon2.hash(req.body.password)
+  const { nom, rna, contact, email, telephone, password } = req.body
   db('refuges').create(
     {
-      fields: req.body,
+      nom,
+      rna,
+      contact,
+      email,
+      telephone,
+      password,
     },
     function (err, record) {
       if (err) {

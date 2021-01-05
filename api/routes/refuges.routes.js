@@ -15,6 +15,8 @@ router.get('/:id', (req, res) => {
         message: 'Unable to fetch user',
       })
     }
+
+    delete record.fields.password
     return res.status(200).json({
       message: 'Retrieved user',
       id: record.id,
@@ -31,9 +33,8 @@ router.get('/:id/edit', (req, res) => {
       })
     }
     return res.status(200).json({
-      message: 'Retrieved user',
+      message: 'Edited user',
       id: record.id,
-      data: record.fields,
     })
   })
 })

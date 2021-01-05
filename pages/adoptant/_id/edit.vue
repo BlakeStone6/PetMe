@@ -14,6 +14,7 @@
         Email:
         <vs-input v-model="user.data.email" type="email" />
       </label>
+      <label> Photo: </label>
       <label>
         Téléphone:
         <vs-input v-model="user.data.telephone" type="tel" />
@@ -72,6 +73,7 @@
 
 <script>
 export default {
+  middleware: 'is-this-user',
   async asyncData({ params, $axios }) {
     // console.log(params)
     const user = await $axios.$get(`/adoptant/${params.id}`)

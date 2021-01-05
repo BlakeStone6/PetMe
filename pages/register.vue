@@ -5,22 +5,43 @@
       <h1 class="title">PetMe</h1>
       <h2 class="subtitle">S'enregistrer</h2>
       <div class="links">
-        <nuxt-link to="/register/adoptant" class="button--green">
+        <p
+          :style="{ cursor: 'pointer' }"
+          class="button--green"
+          @click="adoptantActive = !adoptantActive"
+        >
           Je suis adoptant
-        </nuxt-link>
-        <nuxt-link to="/register/refuge" class="button--grey">
+        </p>
+        <p
+          :style="{ cursor: 'pointer' }"
+          class="button--grey"
+          @click="refugeActive = !refugeActive"
+        >
           Je suis un refuge
-        </nuxt-link>
+        </p>
       </div>
+      <vs-dialog v-model="adoptantActive">
+        <RegisterAdoptantForm />
+      </vs-dialog>
+      <vs-dialog v-model="refugeActive">
+        <RegisterRefugeForm />
+      </vs-dialog>
     </div>
     <div><nuxt-link to="/login">J'ai déjà un compte</nuxt-link></div>
   </div>
 </template>
 
 <script>
+import RegisterAdoptantForm from '@/components/RegisterAdoptantForm'
+import RegisterRefugeForm from '@/components/RegisterRefugeForm'
+
 export default {
   auth: false,
-  components: {},
+  components: { RegisterAdoptantForm, RegisterRefugeForm },
+  data: () => ({
+    refugeActive: false,
+    adoptantActive: false,
+  }),
 }
 </script>
 

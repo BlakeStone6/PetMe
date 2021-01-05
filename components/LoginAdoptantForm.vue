@@ -1,15 +1,21 @@
 <template>
-  <div class="container">
+  <div class="loginForm">
     <h1>Se connecter en tant qu'adoptant</h1>
     <div>
       <form @submit.prevent="onLogin">
         <label>
           Email:
-          <vs-input v-model="email" type="email" />
+          <vs-input v-model="email" type="email">
+            <template #icon> @ </template></vs-input
+          >
         </label>
         <label>
           Mot de passe:
-          <vs-input v-model="password" type="password" />
+          <vs-input v-model="password" type="password">
+            <template #icon>
+              <i class="bx bxs-lock"></i>
+            </template>
+          </vs-input>
         </label>
         <vs-input type="submit" value="Connexion" />
       </form>
@@ -49,4 +55,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.loginForm {
+  align-content: center;
+}
+</style>

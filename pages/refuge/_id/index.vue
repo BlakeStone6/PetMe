@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1>{{ user.data.nom }}</h1>
-    <div class="petList">
+    <div v-if="user.data.animaux" class="petList">
       <h2>Liste des animaux</h2>
 
       <div v-for="(animal, index) in animaux" :key="index">
-        <PetProfileCard :card="animal" />
+        <PetProfileCard :card="animal" :is-this-user="isThisUser" />
       </div>
     </div>
     <nuxt-link v-if="isThisUser" :to="$route.params.id + '/edit'">
@@ -19,14 +19,15 @@
 import PetProfileCard from '~/components/PetProfileCard.vue'
 export default {
   components: { PetProfileCard },
-  middleware: 'user',
+  middleware: ['user'],
   async asyncData({ params, $axios }) {
     const animaux = []
     const user = await $axios.$get(`/refuge/${params.id}`)
-    user.data.animaux.forEach(async (animal) => {
-      const pet = await $axios.$get(`/refuge/${params.id}/animal/${animal}`)
-      animaux.push(pet.record)
-    })
+    if (user.data.animaux)
+      user.data.animaux.forEach(async (animal) => {
+        const pet = await $axios.$get(`/refuge/${params.id}/animal/${animal}`)
+        animaux.push(pet.record)
+      })
     return { user, animaux }
   },
   data: () => ({ isThisUser: false }),

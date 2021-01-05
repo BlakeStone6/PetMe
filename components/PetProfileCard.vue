@@ -15,7 +15,7 @@
       </template>
     </vs-card>
     <vs-dialog v-model="active">
-      <PetProfileDialog :card="card" />
+      <PetProfileDialog :card="card" :is-this-user="isThisUser" />
     </vs-dialog>
   </div>
 </template>
@@ -29,6 +29,10 @@ export default {
   props: {
     card: {
       type: Object,
+      required: true,
+    },
+    isThisUser: {
+      type: Boolean,
       required: true,
     },
   },

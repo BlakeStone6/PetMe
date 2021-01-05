@@ -6,12 +6,26 @@
       </header>
       <h2 class="subtitle">Connexion</h2>
       <div class="links">
-        <nuxt-link to="/login/adoptant" class="button--green">
+        <p
+          :style="{ cursor: 'pointer' }"
+          class="button--green"
+          @click="adoptantActive = !adoptantActive"
+        >
           Je suis adoptant
-        </nuxt-link>
-        <nuxt-link to="/login/refuge" class="button--grey">
+        </p>
+        <p
+          :style="{ cursor: 'pointer' }"
+          class="button--grey"
+          @click="refugeActive = !refugeActive"
+        >
           Je suis un refuge
-        </nuxt-link>
+        </p>
+        <vs-dialog v-model="adoptantActive">
+          <LoginAdoptantForm />
+        </vs-dialog>
+        <vs-dialog v-model="refugeActive">
+          <LoginRefugeForm />
+        </vs-dialog>
       </div>
     </div>
     <div><nuxt-link to="/register">S'enregistrer</nuxt-link></div>
@@ -19,9 +33,15 @@
 </template>
 
 <script>
+import LoginAdoptantForm from '@/components/LoginAdoptantForm'
+import LoginRefugeForm from '@/components/LoginRefugeForm'
 export default {
   auth: 'guest',
-  components: {},
+  components: { LoginAdoptantForm, LoginRefugeForm },
+  data: () => ({
+    refugeActive: false,
+    adoptantActive: false,
+  }),
 }
 </script>
 

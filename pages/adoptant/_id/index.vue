@@ -3,7 +3,9 @@
     <h1>{{ user.data.prenom }} {{ user.data.nom }}</h1>
     <p>{{ $route.params.id }}</p>
 
-    <nuxt-link :to="$route.params.id + '/edit'">Edit</nuxt-link>
+    <nuxt-link v-if="isThisUser" :to="$route.params.id + '/edit'">
+      Edit
+    </nuxt-link>
   </div>
 </template>
 
@@ -12,6 +14,10 @@ export default {
   async asyncData({ params, $axios }) {
     const user = await $axios.$get(`/adoptant/${params.id}`)
     return { user }
+  },
+  data: () => ({ isThisUser: false }),
+  mounted() {
+    this.isThisUser = this.$auth.user === this.$route.params.id
   },
 }
 </script>

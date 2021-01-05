@@ -58,14 +58,22 @@
           Nombre d'enfants:
           <vs-input v-model.number="nbEnfants" type="number" />
         </label>
-        <label>
-          Expérience avec les animaux:
-          <textarea v-model="experience" />
-        </label>
-        <label>
-          Bio:
-          <textarea v-model="bio" />
-        </label>
+        <div>
+          <label>
+            Expérience avec les animaux:
+            <div>
+              <textarea v-model="experience" />
+            </div>
+          </label>
+        </div>
+        <div>
+          <label>
+            Bio:
+            <div>
+              <textarea v-model="bio" />
+            </div>
+          </label>
+        </div>
         <vs-input type="submit" value="Continuer" />
       </form>
     </div>
@@ -73,8 +81,9 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode'
 export default {
-  auth: false,
+  auth: 'guest',
   data: () => ({
     nom: '',
     prenom: '',
@@ -91,12 +100,23 @@ export default {
   methods: {
     onSignup() {
       this.$axios
-        .post('/refuge/register', {
+        .post('/auth/adoptant/register', {
           ...this._data,
         })
-        .then(
-          (response) => (window.location.href = '/refuge/' + response.data.id)
-        )
+        .then(async (response) => {
+          try {
+            this.$auth.reset()
+            const response = await this.$auth.loginWith('adoptantStrategy', {
+              data: { email: this.email, password: this.password },
+            })
+            const token = jwtDecode(response.data.token)
+            this.$auth.setUser(token.sub)
+            window.location.href = '/'
+          } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error(e)
+          }
+        })
         // eslint-disable-next-line no-console
         .catch((err) => console.error(err))
     },
@@ -104,4 +124,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+textarea {
+  resize: none;
+  width: 15em;
+  height: 5em;
+  border-radius: 10px;
+  box-shadow: 0 0 0 3px rgb(75, 137, 194);
+  border: 5px solid transparent;
+  outline: none;
+}
+</style>

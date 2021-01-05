@@ -22,7 +22,7 @@
         <vs-button danger icon circle size="xl" @click="onRejectClick">
           <i class="bx bx-x"></i>
         </vs-button>
-        <vs-button warning icon circle size="xl">
+        <vs-button warning icon circle size="xl" @click="active = !active">
           <i class="bx bx-expand-alt"></i>
         </vs-button>
         <vs-button success icon circle size="xl" @click="onAcceptClick">
@@ -30,10 +30,14 @@
         </vs-button>
       </template>
     </vs-card>
+    <vs-dialog v-model="active">
+      <PetProfileDialog :card="card" :is-this-user="false" />
+    </vs-dialog>
   </div>
 </template>
 
 <script>
+import PetProfileDialog from '@/components/PetProfileDialog'
 const interact = require('interactjs')
 const ACCEPT_CARD = 'cardAccepted'
 const REJECT_CARD = 'cardRejected'
@@ -44,6 +48,7 @@ export default {
     interactOutOfSightXCoordinate: 500,
     interactXThreshold: 100,
   },
+  components: { PetProfileDialog },
 
   props: {
     card: {
@@ -56,19 +61,17 @@ export default {
     },
   },
 
-  data() {
-    return {
-      isShowing: true,
-      isInteractAnimating: true,
-      isInteractDragged: null,
-      interactPosition: {
-        x: 0,
-        y: 0,
-        rotation: 0,
-      },
-    }
-  },
-
+  data: () => ({
+    isShowing: true,
+    isInteractAnimating: true,
+    isInteractDragged: null,
+    interactPosition: {
+      x: 0,
+      y: 0,
+      rotation: 0,
+    },
+    active: false,
+  }),
   computed: {
     transformString() {
       if (!this.isInteractAnimating || this.isInteractDragged) {

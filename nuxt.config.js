@@ -14,7 +14,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['vuesax/dist/vuesax.css'],
+  css: ['vuesax/dist/vuesax.css', 'boxicons/css/boxicons.min.css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: ['@/plugins/vuesax'],
@@ -108,6 +108,6 @@ export default {
   },
 
   router: {
-    middleware: ['auth'],
+    middleware: ['auth', 'user'],
   },
 }
