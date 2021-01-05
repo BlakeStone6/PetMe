@@ -77,4 +77,50 @@ router.put('/:id', (req, res) => {
   )
 })
 
+router.post('/addPet', async (req, res) => {
+  const {
+    nom,
+    image,
+    espece,
+    dateDeNaissance,
+    sexe,
+    description,
+    vaccin,
+    puce,
+    infosMedicales,
+    refuge,
+    taille,
+    races,
+  } = req.body
+  db('animaux').create(
+    {
+      nom,
+      image,
+      espece,
+      dateDeNaissance,
+      sexe,
+      description,
+      vaccin,
+      puce,
+      infosMedicales,
+      refuge,
+      taille,
+      races,
+    },
+    function (err, record) {
+      if (err) {
+        // eslint-disable-next-line no-console
+        console.error(err)
+        return res.status(400).json({
+          message: 'Unable to create animal profil',
+        })
+      }
+      return res.status(200).json({
+        message: 'Successfully created animal profil',
+        id: record.id,
+      })
+    }
+  )
+})
+
 module.exports = router

@@ -78,6 +78,7 @@ router.post('/refuge/login', (req, res) => {
     })
     .firstPage(async function (err, records) {
       if (err) {
+        console.log("There's an error.")
         return res.status(500).json({
           message: 'not ok',
           err,
