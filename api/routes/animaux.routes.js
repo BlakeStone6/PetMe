@@ -119,6 +119,54 @@ router.post('/reject', (req, res) => {
   })
 })
 
+router.put('/pet', (req, res) => {
+  const id = req.body.id
+  const {
+    nom,
+    image,
+    espece,
+    dateDeNaissance,
+    sexe,
+    description,
+    vaccin,
+    puce,
+    infosMedicales,
+    refuge,
+    taille,
+    races,
+  } = req.body.fields
+  db('animaux').update(
+    id,
+    {
+      nom,
+      image,
+      espece,
+      dateDeNaissance,
+      sexe,
+      description,
+      vaccin,
+      puce,
+      infosMedicales,
+      refuge,
+      taille,
+      races,
+    },
+    function (err, record) {
+      if (err) {
+        // eslint-disable-next-line no-console
+        console.error(err)
+        return res.status(400).json({
+          message: 'Unable to update animal profile',
+        })
+      }
+      return res.status(200).json({
+        message: 'Successfully updated animal profile',
+        id: record.id,
+      })
+    }
+  )
+})
+
 const like = function (record, userId) {
   // if there's already been likes on this pet
   if (record.fields.likedBy) {
@@ -280,7 +328,7 @@ const getAllPets = function () {
           // If there are no more records, `done` will get called.
           fetchNextPage()
         },
-        function done(err) {
+        function (err) {
           if (err) {
             // eslint-disable-next-line no-console
             console.error(err)
