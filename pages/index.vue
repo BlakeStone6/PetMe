@@ -16,6 +16,9 @@
         />
       </div>
     </div>
+    <nuxt-link :to="'/adoptant/' + $auth.user" class="button--grey">
+      Mon profil
+    </nuxt-link>
     <vs-button type="flat" @click="logout">Log out</vs-button>
   </div>
 </template>
