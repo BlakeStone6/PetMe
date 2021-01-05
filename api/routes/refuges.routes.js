@@ -77,7 +77,7 @@ router.put('/:id', (req, res) => {
   )
 })
 
-router.post('/addPet', async (req, res) => {
+router.post('/addPet', (req, res) => {
   const {
     nom,
     image,

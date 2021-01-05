@@ -65,10 +65,10 @@
     </div>
 
     <div v-if="isThisUser" class="footer-dialog">
-      <nuxt-link :to="'likes/' + card.id" class="button--green">
+      <nuxt-link :to="refuge + '/likes/' + card.id" class="button--green">
         Voir les profils qui ont liké {{ card.fields.nom }}
       </nuxt-link>
-      <nuxt-link :to="'edit/' + card.id" class="button--grey">
+      <nuxt-link :to="refuge + '/edit/' + card.id" class="button--grey">
         Editer le profil de {{ card.fields.nom }}
       </nuxt-link>
     </div>
@@ -84,6 +84,10 @@ export default {
       required: true,
     },
     isThisUser: {
+      type: Boolean,
+      required: true,
+    },
+    refuge: {
       type: Boolean,
       required: true,
     },

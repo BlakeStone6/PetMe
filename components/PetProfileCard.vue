@@ -15,7 +15,11 @@
       </template>
     </vs-card>
     <vs-dialog v-model="active">
-      <PetProfileDialog :card="card" :is-this-user="isThisUser" />
+      <PetProfileDialog
+        :card="card"
+        :is-this-user="isThisUser"
+        :refuge="refuge"
+      />
     </vs-dialog>
   </div>
 </template>
@@ -33,6 +37,10 @@ export default {
     },
     isThisUser: {
       type: Boolean,
+      required: true,
+    },
+    refuge: {
+      type: String,
       required: true,
     },
   },

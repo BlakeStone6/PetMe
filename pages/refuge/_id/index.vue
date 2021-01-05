@@ -5,13 +5,34 @@
       <h2>Liste des animaux</h2>
 
       <div v-for="(animal, index) in animaux" :key="index">
-        <PetProfileCard :card="animal" :is-this-user="isThisUser" />
+        <PetProfileCard
+          :card="animal"
+          :is-this-user="isThisUser"
+          :refuge="$route.params.id"
+        />
       </div>
     </div>
-    <nuxt-link v-if="isThisUser" to="edit" class="button--grey">
-      Edit
+    <p
+      :style="{ cursor: 'pointer' }"
+      class="button--green"
+      @click="animalForm = !animalForm"
+    >
+      Ajouter un animal
+    </p>
+    <nuxt-link
+      v-if="isThisUser"
+      :to="$route.params.id + '/edit'"
+      class="button--grey"
+    >
+      Modifier le profil refuge
     </nuxt-link>
     <vs-button type="border" @click="logout">Logout</vs-button>
+    <vs-dialog v-model="animalForm">
+      <header>
+        <h1 class="title">Enregistrer une fiche animal</h1>
+      </header>
+      <add-pet-form
+    /></vs-dialog>
   </div>
 </template>
 
@@ -30,7 +51,7 @@ export default {
       })
     return { user, animaux }
   },
-  data: () => ({ isThisUser: false }),
+  data: () => ({ isThisUser: false, animalForm: false }),
   mounted() {
     this.isThisUser = this.$auth.user === this.$route.params.id
   },
