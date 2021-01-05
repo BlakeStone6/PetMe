@@ -24,7 +24,13 @@
             Oui, d'une espèce différente de ceux recherchés
           </span>
         </p>
-        <p><b>Habitation:</b></p>
+        <p>
+          <b>Habitation:</b>
+          <span class="capitalize">{{ card.fields.habitation }}</span>
+        </p>
+        <p v-if="card.fields.nbEnfants">
+          <b>Enfants: </b>{{ card.fields.nbEnfants }}
+        </p>
       </div>
     </div>
 
@@ -32,6 +38,11 @@
       <nuxt-link :to="$auth.user + '/edit'" class="button--grey">
         Editer le profil de {{ card.fields.prenom }} {{ card.fields.nom }}
       </nuxt-link>
+    </div>
+    <div v-else class="footer-dialog">
+      <h3>Contacter {{ card.fields.prenom }}</h3>
+      <p><i class="bx bx-phone"></i>{{ card.fields.telephone }}</p>
+      <p><i class="bx bx-envelope"></i>{{ card.fields.email }}</p>
     </div>
   </div>
 </template>

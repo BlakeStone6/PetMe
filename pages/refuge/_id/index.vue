@@ -8,7 +8,7 @@
         <PetProfileCard :card="animal" :is-this-user="isThisUser" />
       </div>
     </div>
-    <nuxt-link v-if="isThisUser" :to="$route.params.id + '/edit'">
+    <nuxt-link v-if="isThisUser" to="edit" class="button--grey">
       Edit
     </nuxt-link>
     <vs-button type="border" @click="logout">Logout</vs-button>

@@ -29,6 +29,10 @@
       </label>
       <vs-input type="submit" value="Continuer" />
     </form>
+
+    <nuxt-link :to="'/refuge/' + $route.params.id" class="button--green">
+      Retour au profil
+    </nuxt-link>
   </div>
 </template>
 
