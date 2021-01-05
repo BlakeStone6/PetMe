@@ -1,16 +1,14 @@
 <template>
   <div>
-    <h1>{{ user.data.prenom }} {{ user.data.nom }}</h1>
-    <p>{{ $route.params.id }}</p>
-
-    <nuxt-link v-if="isThisUser" :to="$route.params.id + '/edit'">
-      Edit
-    </nuxt-link>
+    <AdoptantProfile :card="user" :is-this-user="isThisUser" />
+    <nuxt-link to="/" class="button--green">Back</nuxt-link>
   </div>
 </template>
 
 <script>
+import AdoptantProfile from '~/components/AdoptantProfile.vue'
 export default {
+  components: { AdoptantProfile },
   async asyncData({ params, $axios }) {
     const user = await $axios.$get(`/adoptant/${params.id}`)
     return { user }

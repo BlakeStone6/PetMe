@@ -19,7 +19,7 @@ router.get('/:id', (req, res) => {
     return res.status(200).json({
       message: 'Retrieved user',
       id: record.id,
-      data: record.fields,
+      fields: record.fields,
     })
   })
 })

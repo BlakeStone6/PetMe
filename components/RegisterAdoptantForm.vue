@@ -8,6 +8,10 @@
           <vs-input v-model="nom" type="text" />
         </label>
         <label>
+          Photo de profil (url):
+          <vs-input v-model="photo[0].url" type="url" />
+        </label>
+        <label>
           Prénom:
           <vs-input v-model="prenom" type="text" />
         </label>
@@ -85,6 +89,11 @@ import jwtDecode from 'jwt-decode'
 export default {
   auth: 'guest',
   data: () => ({
+    photo: [
+      {
+        url: '',
+      },
+    ],
     nom: '',
     prenom: '',
     email: '',
@@ -99,6 +108,7 @@ export default {
 
   methods: {
     onSignup() {
+      console.log(this.photo)
       this.$axios
         .post('/auth/adoptant/register', {
           ...this._data,
@@ -130,7 +140,7 @@ textarea {
   width: 15em;
   height: 5em;
   border-radius: 10px;
-  box-shadow: 0 0 0 3px rgb(75, 137, 194);
+  box-shadow: 0 0 0 1px rgb(75, 137, 194);
   border: 5px solid transparent;
   outline: none;
 }

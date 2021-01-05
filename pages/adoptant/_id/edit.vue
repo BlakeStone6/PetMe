@@ -1,27 +1,30 @@
 <template>
   <div>
-    <h1>Edit user {{ user.data.prenom }} {{ user.data.nom }}</h1>
+    <h1>Edit user {{ user.fields.prenom }} {{ user.fields.nom }}</h1>
     <form @submit.prevent="onSubmit">
       <label>
         Nom:
-        <vs-input v-model="user.data.nom" type="text" />
+        <vs-input v-model="user.fields.nom" type="text" />
       </label>
       <label>
         Prénom:
-        <vs-input v-model="user.data.prenom" type="text" />
+        <vs-input v-model="user.fields.prenom" type="text" />
       </label>
       <label>
         Email:
-        <vs-input v-model="user.data.email" type="email" />
+        <vs-input v-model="user.fields.email" type="email" />
       </label>
-      <label> Photo: </label>
+      <label>
+        URL de la photo:
+        <vs-input v-model="user.fields.photo[0].url" type="url" />
+      </label>
       <label>
         Téléphone:
-        <vs-input v-model="user.data.telephone" type="tel" />
+        <vs-input v-model="user.fields.telephone" type="tel" />
       </label>
       <label>
         Mot de passe:
-        <vs-input v-model="user.data.password" type="password" />
+        <vs-input v-model="user.fields.password" type="password" />
       </label>
       <label>
         Confirmer le mot de passe:
@@ -29,7 +32,7 @@
       </label>
       <label>
         Type d'habitation:
-        <vs-select v-model="user.data.habitation" placeholder="Choisir...">
+        <vs-select v-model="user.fields.habitation" placeholder="Choisir...">
           <vs-option label="Appartement" value="appartement">
             Appartement
           </vs-option>
@@ -44,7 +47,10 @@
       </label>
       <label>
         Animaux présents (même espèce que celui que vous voulez adopter?):
-        <vs-select v-model="user.data.animauxPresents" placeholder="Choisir...">
+        <vs-select
+          v-model="user.fields.animauxPresents"
+          placeholder="Choisir..."
+        >
           <vs-option label="Non" value="non"> Non </vs-option>
           <vs-option label="Oui, même espèce" value="oui same">
             Oui, même espèce
@@ -56,36 +62,59 @@
       </label>
       <label>
         Nombre d'enfants:
-        <vs-input v-model.number="user.data.nbEnfants" type="number" />
+        <vs-input v-model.number="user.fields.nbEnfants" type="number" />
       </label>
       <label>
         Expérience avec les animaux:
-        <textarea v-model="user.data.experience" />
+        <textarea v-model="user.fields.experience" />
       </label>
       <label>
         Bio:
-        <textarea v-model="user.data.bio" />
+        <textarea v-model="user.fields.bio" />
       </label>
       <vs-input type="submit" value="Continuer" />
     </form>
+    <nuxt-link :to="'/adoptant/' + $route.params.id" class="button--green">
+      Retour au profil
+    </nuxt-link>
   </div>
 </template>
 
 <script>
 export default {
-  middleware: 'is-this-user',
+  middleware: ['is-this-user', 'user'],
   async asyncData({ params, $axios }) {
     // console.log(params)
     const user = await $axios.$get(`/adoptant/${params.id}`)
-    // console.log(user)
     return { user }
+  },
+  data: () => ({
+    photo: [
+      {
+        url: '',
+      },
+    ],
+  }),
+
+  computed: {
+    /* The FormData : Here We Make A Form With Images Data To Submit. */
+    form() {
+      const form = new FormData()
+
+      this.photo.forEach((file, index) => {
+        form.append('files[' + index + ']', file)
+      })
+
+      return form
+    },
   },
 
   methods: {
     onSubmit() {
-      this.$axios
+      if (this.user.fields.password === '') delete this.user.fields.password
+      this.photo[0].url = this.user.fields.photo[0].url
         .put(`/adoptant/${this.$route.params.id}`, {
-          ...this._data.user.data,
+          ...this._data.user.fields,
         })
         .then(
           (response) => (window.location.href = '/adoptant/' + response.data.id)
@@ -99,4 +128,28 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+label {
+  display: block;
+}
+textarea {
+  display: block;
+  resize: none;
+  max-width: 15em;
+  max-height: 5em;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgb(75, 137, 194);
+  border: 5px solid transparent;
+  outline: none;
+}
+.custom-file {
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  display: inline-block;
+  border: 2px dashed #a0a0a0;
+}
+
+.custom-file input {
+  display: none;
+}
+</style>
