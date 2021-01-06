@@ -1,7 +1,7 @@
 <template>
-  <div class="AddPetForm">
-    <h1>Edit {{ pet.fields.nom }}</h1>
-    <form @submit.prevent="onAddPet">
+  <div class="profile">
+    <h1 class="title" align="center">Editer {{ pet.fields.nom }}</h1>
+    <form class="editForm" @submit.prevent="onAddPet">
       <label>
         Nom
         <vs-input v-model="pet.fields.nom" type="text" required />
@@ -81,12 +81,14 @@
         <vs-input v-model="pet.fields.infosMedicales" type="text" required />
       </label>
       <div>
-        <vs-input type="submit" value="Continuer" />
+        <vs-input type="submit" value="Continuer" class="submit" />
       </div>
     </form>
-    <nuxt-link :to="'/refuge/' + $route.params.id" class="button--green">
-      Retour au profil
-    </nuxt-link>
+    <footer>
+      <nuxt-link :to="'/refuge/' + $route.params.id" class="button--green">
+        Retour au profil
+      </nuxt-link>
+    </footer>
   </div>
 </template>
 
