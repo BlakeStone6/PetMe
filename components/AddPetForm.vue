@@ -75,7 +75,7 @@
         Autres informations
         <vs-input v-model="infosMedicales" type="text" required />
       </label>
-      <div>
+      <div class="formButton">
         <vs-input type="submit" value="Continuer" />
       </div>
     </form>
@@ -111,3 +111,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.formButton {
+  padding: 1em;
+  margin: auto;
+}
+</style>

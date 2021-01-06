@@ -26,8 +26,11 @@
       <vs-dialog v-model="refugeActive">
         <RegisterRefugeForm />
       </vs-dialog>
+      <div>
+        <span>Déjà membre ?</span>
+        <nuxt-link to="/login">Se connecter</nuxt-link>
+      </div>
     </div>
-    <div><nuxt-link to="/login">J'ai déjà un compte</nuxt-link></div>
   </div>
 </template>
 
@@ -45,7 +48,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   margin: 0 auto;
   min-height: 100vh;

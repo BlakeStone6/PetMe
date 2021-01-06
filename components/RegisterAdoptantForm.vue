@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
-    <h1>S'enregistrer en tant qu'adoptant</h1>
-    <div>
+  <div>
+    <header>
+      <h1>S'enregistrer en tant qu'adoptant</h1>
+    </header>
+    <div class="registerForm">
       <form @submit.prevent="onSignup">
         <label>
           Nom:
@@ -78,7 +80,7 @@
             </div>
           </label>
         </div>
-        <vs-input type="submit" value="Continuer" />
+        <vs-input type="submit" value="Continuer" class="registerButton" />
       </form>
     </div>
   </div>
@@ -108,7 +110,6 @@ export default {
 
   methods: {
     onSignup() {
-      console.log(this.photo)
       this.$axios
         .post('/auth/adoptant/register', {
           ...this._data,
@@ -135,6 +136,21 @@ export default {
 </script>
 
 <style>
+.registerForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+label {
+  justify-content: start;
+  align-items: center;
+}
+.registerButton {
+  padding: 1em 0;
+}
 textarea {
   resize: none;
   width: 15em;

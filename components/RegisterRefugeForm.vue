@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
-    <h1>S'enregistrer en tant qu'adoptant</h1>
-    <div>
+  <div>
+    <header>
+      <h1>S'enregistrer en tant que refuge</h1>
+    </header>
+    <div class="registerForm">
       <form @submit.prevent="onSignup">
         <label>
           Nom du refuge:
@@ -28,7 +30,7 @@
           Confirmer le mot de passe:
           <vs-input type="password" />
         </label>
-        <vs-input type="submit" value="Continuer" />
+        <vs-input type="submit" value="Continuer" class="registerButton" />
       </form>
     </div>
   </div>
@@ -55,7 +57,6 @@ export default {
           ...this._data,
         })
         .then(async (response) => {
-          console.log(response)
           try {
             this.$auth.reset()
             const res = await this.$auth.loginWith('refugeStrategy', {

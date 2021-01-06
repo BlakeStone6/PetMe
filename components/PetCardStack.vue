@@ -32,7 +32,7 @@ export default {
 .cards {
   position: relative;
   display: flex;
-  margin: 50px;
+  margin: auto;
   width: 300px;
 }
 </style>

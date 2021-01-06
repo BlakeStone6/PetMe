@@ -1,23 +1,34 @@
 <template>
-  <div class="container">
-    <h1>Se connecter en tant que refuge</h1>
-    <div>
+  <div>
+    <header>
+      <h1>Se connecter en tant que refuge</h1>
+    </header>
+    <div class="loginForm">
       <form @submit.prevent="onLogin">
         <label>
           Email:
-          <vs-input v-model="email" type="email" />
+          <vs-input v-model="email" type="email">
+            <template #icon> @ </template>
+          </vs-input>
         </label>
         <label>
           Mot de passe:
-          <vs-input v-model="password" type="password" />
+          <vs-input v-model="password" type="password">
+            <template #icon>
+              <i class="bx bxs-lock"></i>
+            </template>
+          </vs-input>
         </label>
-        <vs-input type="submit" value="Connexion" />
+        <vs-input type="submit" value="Connexion" class="loginButton" />
       </form>
+    </div>
+
+    <footer>
       <p>
         Pas de compte ?
         <nuxt-link to="../register/refuge">S'enregistrer</nuxt-link>
       </p>
-    </div>
+    </footer>
   </div>
 </template>
 
@@ -49,4 +60,24 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.loginForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+label {
+  justify-content: start;
+  align-items: center;
+}
+.loginButton {
+  padding: 1em 0;
+}
+
+footer {
+  text-align: center;
+}
+</style>

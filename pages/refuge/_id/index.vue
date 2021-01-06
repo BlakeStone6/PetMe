@@ -1,14 +1,13 @@
 <template>
-  <div>
-    <h1>{{ user.data.nom }}</h1>
+  <div class="profile">
+    <h1 class="title">{{ user.data.nom }}</h1>
     <div v-if="user.data.animaux" class="petList">
-      <h2>Liste des animaux</h2>
-
       <div v-for="(animal, index) in animaux" :key="index">
         <PetProfileCard
           :card="animal"
           :is-this-user="isThisUser"
           :refuge="$route.params.id"
+          class="profile"
         />
       </div>
     </div>
@@ -64,4 +63,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.profile {
+  margin: auto;
+}
+
+footer {
+  text-align: center;
+}
+</style>

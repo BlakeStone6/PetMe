@@ -63,31 +63,4 @@ export default {
 }
 </script>
 
-<style>
-.profile {
-  max-width: 50vw;
-}
-
-.header-dialog,
-.footer-dialog {
-  padding: 1em;
-  text-align: center;
-}
-
-.con-form {
-  padding: 1em;
-}
-
-.capitalize {
-  text-transform: capitalize;
-}
-
-img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-vs-button {
-  display: inline;
-}
-</style>
+<style></style>

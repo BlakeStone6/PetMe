@@ -1,7 +1,9 @@
 <template>
   <div>
-    <AdoptantProfile :card="user" :is-this-user="isThisUser" />
-    <nuxt-link to="/" class="button--green">Back</nuxt-link>
+    <AdoptantProfile :card="user" :is-this-user="isThisUser" class="profile" />
+    <footer>
+      <nuxt-link to="/" class="button--green">Retour</nuxt-link>
+    </footer>
   </div>
 </template>
 
@@ -20,4 +22,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.profile {
+  margin: auto;
+}
+
+footer {
+  text-align: center;
+}
+</style>

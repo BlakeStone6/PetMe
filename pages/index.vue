@@ -7,7 +7,7 @@
       </header>
       <div v-if="$fetchState.pending" ref="loading"></div>
       <p v-else-if="$fetchState.error">An error occurred :(</p>
-      <div>
+      <div class="cardstack">
         <PetCardStack
           :cards="visibleCards"
           @cardAccepted="handleCardAccepted"
@@ -16,10 +16,12 @@
         />
       </div>
     </div>
-    <nuxt-link :to="'/adoptant/' + $auth.user" class="button--grey">
-      Mon profil
-    </nuxt-link>
-    <vs-button type="flat" @click="logout">Log out</vs-button>
+    <footer>
+      <nuxt-link :to="'/adoptant/' + $auth.user" class="button--grey">
+        Mon profil
+      </nuxt-link>
+      <p class="button--red" type="flat" @click="logout">Déconnexion</p>
+    </footer>
   </div>
 </template>
 
@@ -74,64 +76,20 @@ export default {
 </style>
 
 <style>
-.container {
+.app {
   margin: auto;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 80vh;
   text-align: center;
 }
 
-.app {
+.cardstack {
+  padding: 8em;
   margin: auto;
-  min-height: 100vh;
-  display: flex;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
-  font-weight: 300;
-  font-size: 55px;
-  color: #35495e;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  margin: 25px 0;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 1.1rem;
-  color: #526488;
-  word-spacing: 2px;
-  padding-bottom: 15px;
-  max-width: 600px;
-}
-
-.subtitle a {
-  font-weight: 500;
-  color: inherit;
-}
-
-.content-logos {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 500px;
-}
-
-.plus {
-  font-size: 2.5rem;
-  margin: 15px;
-  color: #35495e;
-}
-
-.h3 {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 400;
-  margin: 10px;
+footer {
+  text-align: center;
+  margin: auto;
 }
 </style>

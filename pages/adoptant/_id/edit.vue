@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <h1>Edit user {{ user.fields.prenom }} {{ user.fields.nom }}</h1>
+  <div class="profile">
+    <h1 class="title">
+      Edit user {{ user.fields.prenom }} {{ user.fields.nom }}
+    </h1>
     <form @submit.prevent="onSubmit">
       <label>
         Nom:
@@ -142,14 +144,21 @@ textarea {
   border: 5px solid transparent;
   outline: none;
 }
-.custom-file {
-  padding: 1.2rem;
-  border-radius: 0.8rem;
-  display: inline-block;
-  border: 2px dashed #a0a0a0;
+
+.profile {
+  margin: auto;
 }
 
-.custom-file input {
-  display: none;
+label {
+  margin: auto;
+  text-align: center;
+}
+
+vs-input {
+  margin: auto;
+}
+
+footer {
+  text-align: center;
 }
 </style>

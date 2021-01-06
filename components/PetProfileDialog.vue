@@ -94,7 +94,6 @@ export default {
   },
   methods: {
     getAge(dateString) {
-      console.log(this.card)
       const today = new Date()
       const birthDate = new Date(dateString)
       let age = today.getFullYear() - birthDate.getFullYear()
@@ -108,27 +107,4 @@ export default {
 }
 </script>
 
-<style>
-.header-dialog,
-.footer-dialog {
-  padding: 1em;
-  text-align: center;
-}
-
-.con-form {
-  padding: 1em;
-}
-
-.capitalize {
-  text-transform: capitalize;
-}
-
-img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-vs-button {
-  display: inline;
-}
-</style>
+<style></style>

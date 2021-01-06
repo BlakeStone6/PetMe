@@ -6,18 +6,10 @@
       </header>
       <h2 class="subtitle">Connexion</h2>
       <div class="links">
-        <p
-          :style="{ cursor: 'pointer' }"
-          class="button--green"
-          @click="adoptantActive = !adoptantActive"
-        >
+        <p class="button--green" @click="adoptantActive = !adoptantActive">
           Je suis adoptant
         </p>
-        <p
-          :style="{ cursor: 'pointer' }"
-          class="button--grey"
-          @click="refugeActive = !refugeActive"
-        >
+        <p class="button--grey" @click="refugeActive = !refugeActive">
           Je suis un refuge
         </p>
         <vs-dialog v-model="adoptantActive">
@@ -27,8 +19,11 @@
           <LoginRefugeForm />
         </vs-dialog>
       </div>
+      <div>
+        <span>Pas de compte ?</span>
+        <nuxt-link to="/register">S'enregistrer</nuxt-link>
+      </div>
     </div>
-    <div><nuxt-link to="/register">S'enregistrer</nuxt-link></div>
   </div>
 </template>
 
@@ -45,7 +40,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -109,5 +104,25 @@ export default {
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
   margin: 10px;
+}
+
+.loginForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+label {
+  justify-content: start;
+  align-items: center;
+}
+.loginButton {
+  padding: 1em 0;
+}
+
+footer {
+  text-align: center;
 }
 </style>

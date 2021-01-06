@@ -58,5 +58,6 @@ export default {
 <style>
 .profileCard {
   padding: 1vw;
+  margin: auto;
 }
 </style>
