@@ -17,7 +17,7 @@
       </template>
     </vs-card>
     <vs-dialog v-model="active">
-      <AdoptantProfile :card="card" :is-this-user="isThisUser" />
+      <adoptant-profile :card="card" :is-this-user="isThisUser" />
     </vs-dialog>
   </div>
 </template>

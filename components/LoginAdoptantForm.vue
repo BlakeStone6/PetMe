@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <h1>Se connecter en tant qu'adoptant</h1>
+      <h1 align="center">Se connecter en tant qu'adoptant</h1>
     </header>
     <div class="loginForm">
       <form @submit.prevent="onLogin">
@@ -36,8 +36,8 @@ import jwtDecode from 'jwt-decode'
 export default {
   auth: 'guest',
   data: () => ({
-    email: 'getintherobot@shin.ji',
-    password: 'no',
+    email: '',
+    password: '',
   }),
 
   methods: {
@@ -78,5 +78,10 @@ label {
 
 footer {
   text-align: center;
+}
+
+h1 {
+  display: block;
+  font-weight: 300;
 }
 </style>

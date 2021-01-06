@@ -1,6 +1,6 @@
 <template>
   <div class="cards">
-    <PetCard
+    <pet-card
       v-for="(card, index) in cards"
       :key="card"
       :card="card"

@@ -37,8 +37,8 @@ import jwtDecode from 'jwt-decode'
 export default {
   auth: 'guest',
   data: () => ({
-    email: 'potizanimo@gmail.co',
-    password: 'popop',
+    email: '',
+    password: '',
   }),
 
   methods: {

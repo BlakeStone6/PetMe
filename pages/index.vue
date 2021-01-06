@@ -3,11 +3,11 @@
     <div class="app">
       <header>
         <h1 class="title">PetMe</h1>
-        <h2 class="subtitle">We pet you</h2>
+        <h2 class="subtitle">Get a new pet today!</h2>
       </header>
       <div v-if="$fetchState.pending" ref="loading"></div>
-      <p v-else-if="$fetchState.error">An error occurred :(</p>
-      <div class="cardstack">
+      <p v-else-if="$fetchState.error">Erreur de chargement des animaux :(</p>
+      <div v-else class="profile">
         <pet-card-stack
           :cards="visibleCards"
           @cardAccepted="handleCardAccepted"
@@ -75,17 +75,19 @@ export default {
 @import './styles/mixins.scss';
 </style>
 
-<style>
-.app {
+<style scoped>
+.container {
+  background-color: #fff;
   margin: auto;
-  min-height: 80vh;
-  text-align: center;
+  margin-top: 10vh;
+  max-width: 60vw;
+  border-radius: 25px;
 }
 
-.cardstack {
-  padding: 8em;
+.app {
   margin: auto;
-  display: block;
+  min-height: 60vh;
+  text-align: center;
 }
 
 footer {

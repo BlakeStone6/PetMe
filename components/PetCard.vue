@@ -31,7 +31,7 @@
       </template>
     </vs-card>
     <vs-dialog v-model="active" not-close>
-      <PetProfileDialog :card="card" :is-this-user="false" />
+      <pet-profile-dialog :card="card" :is-this-user="false" />
     </vs-dialog>
   </div>
 </template>

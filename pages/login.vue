@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <div>
+    <div class="content">
       <header>
-        <h1 class="title">PetMe</h1>
+        <h1 class="title">Connexion</h1>
       </header>
-      <h2 class="subtitle">Connexion</h2>
+      <h2 class="subtitle">PetMe</h2>
       <div class="links">
         <p class="button--green" @click="adoptantActive = !adoptantActive">
           Je suis adoptant
@@ -13,10 +13,10 @@
           Je suis un refuge
         </p>
         <vs-dialog v-model="adoptantActive">
-          <LoginAdoptantForm />
+          <login-adoptant-form />
         </vs-dialog>
         <vs-dialog v-model="refugeActive">
-          <LoginRefugeForm />
+          <login-refuge-form />
         </vs-dialog>
       </div>
       <div>
@@ -48,6 +48,12 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.content {
+  background-color: #fff;
+  padding: 5vw;
+  border-radius: 25px;
 }
 
 .title {

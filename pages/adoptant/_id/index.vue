@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AdoptantProfile :card="user" :is-this-user="isThisUser" class="profile" />
+    <adoptant-profile :card="user" :is-this-user="isThisUser" class="profile" />
     <footer>
       <nuxt-link to="/" class="button--green">Retour</nuxt-link>
     </footer>

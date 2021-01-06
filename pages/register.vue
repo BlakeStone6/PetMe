@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <div>
+    <div class="content">
       <header></header>
-      <h1 class="title">PetMe</h1>
-      <h2 class="subtitle">S'enregistrer</h2>
+      <h1 class="title">S'enregistrer</h1>
+      <h2 class="subtitle">PetMe</h2>
       <div class="links">
         <p
           :style="{ cursor: 'pointer' }"
@@ -21,10 +21,10 @@
         </p>
       </div>
       <vs-dialog v-model="adoptantActive">
-        <RegisterAdoptantForm />
+        <register-adoptant-form />
       </vs-dialog>
       <vs-dialog v-model="refugeActive">
-        <RegisterRefugeForm />
+        <register-refuge-form />
       </vs-dialog>
       <div>
         <span>Déjà membre ?</span>
@@ -56,6 +56,12 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.content {
+  background-color: #fff;
+  padding: 5vw;
+  border-radius: 25px;
 }
 
 .title {
