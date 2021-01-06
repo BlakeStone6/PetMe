@@ -1,0 +1,134 @@
+<template>
+  <div class="container">
+    <div class="content">
+      <header>
+        <h1 class="title">Connexion</h1>
+      </header>
+      <h2 class="subtitle">PetMe</h2>
+      <div class="links">
+        <p class="button--green" @click="adoptantActive = !adoptantActive">
+          Je suis adoptant
+        </p>
+        <p class="button--grey" @click="refugeActive = !refugeActive">
+          Je suis un refuge
+        </p>
+        <vs-dialog v-model="adoptantActive">
+          <login-adoptant-form />
+        </vs-dialog>
+        <vs-dialog v-model="refugeActive">
+          <login-refuge-form />
+        </vs-dialog>
+      </div>
+      <div>
+        <span>Pas de compte ?</span>
+        <nuxt-link to="/register">S'enregistrer</nuxt-link>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import LoginAdoptantForm from '@/components/LoginAdoptantForm'
+import LoginRefugeForm from '@/components/LoginRefugeForm'
+export default {
+  auth: 'guest',
+  components: { LoginAdoptantForm, LoginRefugeForm },
+  data: () => ({
+    refugeActive: false,
+    adoptantActive: false,
+  }),
+}
+</script>
+
+<style scoped>
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.content {
+  background-color: #fff;
+  padding: 5vw;
+  border-radius: 25px;
+}
+
+.title {
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  display: block;
+  font-weight: 300;
+  font-size: 55px;
+  color: #35495e;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 25px 0;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: #526488;
+  word-spacing: 2px;
+  padding-bottom: 15px;
+  max-width: 600px;
+}
+
+.subtitle a {
+  font-weight: 500;
+  color: inherit;
+}
+
+.links {
+  padding-top: 15px;
+  margin-bottom: 20px;
+}
+
+.links::after {
+  padding-top: 15px;
+  margin-bottom: 20px;
+}
+
+.content-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 500px;
+}
+
+.plus {
+  font-size: 2.5rem;
+  margin: 15px;
+  color: #35495e;
+}
+
+.h3 {
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  margin: 10px;
+}
+
+.loginForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+label {
+  justify-content: start;
+  align-items: center;
+}
+.loginButton {
+  padding: 1em 0;
+}
+
+footer {
+  text-align: center;
+}
+</style>

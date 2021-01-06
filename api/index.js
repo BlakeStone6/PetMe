@@ -1,6 +1,9 @@
 const express = require('express')
 
-const calculatorRoutes = require('./routes/calculator.routes')
+const auth = require('./routes/auth')
+const adoptantRoutes = require('./routes/adoptants.routes')
+const refugeRoutes = require('./routes/refuges.routes')
+const animauxRoutes = require('./routes/animaux.routes')
 
 const app = express()
 app.use(express.json())
@@ -12,24 +15,9 @@ app.get('/', (req, res) => {
   })
 })
 
-app.use('/calculator', calculatorRoutes)
-
-app.get(
-  '/secret/:key',
-  (req, res, next) => {
-    if (req.params.key !== 'hello') {
-      return res.status(401).json({
-        message: "It's top secret, you need the right password you dumb dumb",
-      })
-    }
-
-    next()
-  },
-  (req, res) => {
-    return res.status(200).json({
-      message: 'TOP SECRET',
-    })
-  }
-)
+app.use('/auth', auth)
+app.use('/adoptant', adoptantRoutes)
+app.use('/refuge', refugeRoutes)
+app.use('/animaux', animauxRoutes)
 
 module.exports = app
