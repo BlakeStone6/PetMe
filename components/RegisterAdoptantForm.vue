@@ -143,7 +143,6 @@ export default {
   padding: 20px;
   flex-wrap: wrap;
 }
-
 label {
   justify-content: start;
   align-items: center;

@@ -1,5 +1,6 @@
 <template>
   <div class="AddPetForm">
+    <h1>Edit {{ pet.fields.nom }}</h1>
     <form @submit.prevent="onAddPet">
       <label>
         Nom

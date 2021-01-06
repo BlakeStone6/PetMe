@@ -8,7 +8,7 @@
       <div v-if="$fetchState.pending" ref="loading"></div>
       <p v-else-if="$fetchState.error">An error occurred :(</p>
       <div class="cardstack">
-        <PetCardStack
+        <pet-card-stack
           :cards="visibleCards"
           @cardAccepted="handleCardAccepted"
           @cardRejected="handleCardRejected"

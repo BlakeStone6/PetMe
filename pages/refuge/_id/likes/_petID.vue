@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <h1>Profils qui ont liké {{ petName }}</h1>
-    <div v-for="adoptant in adoptants" :key="adoptant">
+  <div class="profile">
+    <h1 align="center">Profils qui ont liké {{ petName }}</h1>
+    <div v-for="adoptant in adoptants" :key="adoptant" class="profs">
       <adoptant-profile-card
         :card="adoptant"
         :is-this-user="false"
         :refuge="$route.params.id"
       />
     </div>
-    <nuxt-link :to="'/refuge/' + $route.params.id" class="button--green">
-      Retour au profil
-    </nuxt-link>
+    <footer>
+      <nuxt-link :to="'/refuge/' + $route.params.id" class="button--green">
+        Retour au profil
+      </nuxt-link>
+    </footer>
   </div>
 </template>
 
@@ -32,4 +34,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.profs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

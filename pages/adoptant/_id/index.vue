@@ -23,11 +23,8 @@ export default {
 </script>
 
 <style>
-.profile {
-  margin: auto;
-}
-
 footer {
   text-align: center;
+  padding: 2vw;
 }
 </style>

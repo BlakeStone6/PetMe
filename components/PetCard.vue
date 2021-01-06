@@ -30,7 +30,7 @@
         </vs-button>
       </template>
     </vs-card>
-    <vs-dialog v-model="active">
+    <vs-dialog v-model="active" not-close>
       <PetProfileDialog :card="card" :is-this-user="false" />
     </vs-dialog>
   </div>

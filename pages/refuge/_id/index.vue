@@ -2,30 +2,31 @@
   <div class="profile">
     <h1 class="title">{{ user.data.nom }}</h1>
     <div v-if="user.data.animaux" class="petList">
-      <div v-for="(animal, index) in animaux" :key="index">
-        <PetProfileCard
+      <div v-for="(animal, index) in animaux" :key="index" class="pet">
+        <pet-profile-card
           :card="animal"
           :is-this-user="isThisUser"
           :refuge="$route.params.id"
-          class="profile"
         />
       </div>
     </div>
-    <p
-      :style="{ cursor: 'pointer' }"
-      class="button--green"
-      @click="animalForm = !animalForm"
-    >
-      Ajouter un animal
-    </p>
-    <nuxt-link
-      v-if="isThisUser"
-      :to="$route.params.id + '/edit'"
-      class="button--grey"
-    >
-      Modifier le profil refuge
-    </nuxt-link>
-    <vs-button type="border" @click="logout">Logout</vs-button>
+    <footer>
+      <p
+        :style="{ cursor: 'pointer' }"
+        class="button--green"
+        @click="animalForm = !animalForm"
+      >
+        Ajouter un animal
+      </p>
+      <nuxt-link
+        v-if="isThisUser"
+        :to="$route.params.id + '/edit'"
+        class="button--grey"
+      >
+        Modifier le profil refuge
+      </nuxt-link>
+      <p class="button--red" type="border" @click="logout">Déconnexion</p>
+    </footer>
     <vs-dialog v-model="animalForm">
       <header>
         <h1 class="title">Enregistrer une fiche animal</h1>
@@ -64,11 +65,17 @@ export default {
 </script>
 
 <style>
-.profile {
-  margin: auto;
+.title {
+  text-align: center;
+}
+
+.pet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 footer {
-  text-align: center;
+  padding: 2vw;
 }
 </style>

@@ -3,7 +3,7 @@
     <h1 class="title">
       Edit user {{ user.fields.prenom }} {{ user.fields.nom }}
     </h1>
-    <form @submit.prevent="onSubmit">
+    <form class="editForm" @submit.prevent="onSubmit">
       <label>
         Nom:
         <vs-input v-model="user.fields.nom" type="text" />
@@ -74,11 +74,13 @@
         Bio:
         <textarea v-model="user.fields.bio" />
       </label>
-      <vs-input type="submit" value="Continuer" />
+      <vs-input type="submit" value="Continuer" class="submit" />
     </form>
-    <nuxt-link :to="'/adoptant/' + $route.params.id" class="button--green">
-      Retour au profil
-    </nuxt-link>
+    <footer>
+      <nuxt-link :to="'/adoptant/' + $route.params.id" class="button--green">
+        Retour au profil
+      </nuxt-link>
+    </footer>
   </div>
 </template>
 
@@ -137,25 +139,37 @@ label {
 textarea {
   display: block;
   resize: none;
-  max-width: 15em;
-  max-height: 5em;
+  width: 30em;
+  height: 5em;
   border-radius: 10px;
   box-shadow: 0 0 0 1px rgb(75, 137, 194);
   border: 5px solid transparent;
   outline: none;
 }
 
-.profile {
-  margin: auto;
+.editForm {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.title {
+  text-align: center;
 }
 
 label {
   margin: auto;
-  text-align: center;
 }
 
 vs-input {
   margin: auto;
+}
+
+.submit {
+  margin: auto;
+  padding: 2em;
 }
 
 footer {

@@ -112,5 +112,9 @@ img {
 
 .profile {
   max-width: 50vw;
+  margin: auto;
+  margin-top: 3vw;
+  background-color: #fff;
+  border-radius: 25px;
 }
 </style>

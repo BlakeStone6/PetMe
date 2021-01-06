@@ -77,4 +77,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.registerForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+</style>

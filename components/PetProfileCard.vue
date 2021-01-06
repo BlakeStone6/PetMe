@@ -14,8 +14,8 @@
         <p>{{ card.fields.description }}</p>
       </template>
     </vs-card>
-    <vs-dialog v-model="active">
-      <PetProfileDialog
+    <vs-dialog v-model="active" not-close>
+      <pet-profile-dialog
         :card="card"
         :is-this-user="isThisUser"
         :refuge="refuge"
@@ -57,7 +57,7 @@ export default {
 
 <style>
 .profileCard {
-  padding: 1vw;
+  padding: 0.3em;
   margin: auto;
 }
 </style>

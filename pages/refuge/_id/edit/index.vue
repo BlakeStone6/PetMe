@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>Edit user {{ user.data.nom }}</h1>
-    <form @submit.prevent="onSubmit">
+  <div class="profile">
+    <h1 class="title">Editer {{ user.data.nom }}</h1>
+    <form class="editForm" @submit.prevent="onSubmit">
       <label>
         Nom du refuge:
         <vs-input v-model="user.data.nom" type="text" />
@@ -27,12 +27,13 @@
         Confirmer le mot de passe:
         <vs-input type="password" />
       </label>
-      <vs-input type="submit" value="Continuer" />
+      <vs-input type="submit" value="Continuer" class="submit" />
     </form>
-
-    <nuxt-link :to="'/refuge/' + $route.params.id" class="button--green">
-      Retour au profil
-    </nuxt-link>
+    <footer>
+      <nuxt-link :to="'/refuge/' + $route.params.id" class="button--green">
+        Retour au profil
+      </nuxt-link>
+    </footer>
   </div>
 </template>
 
@@ -61,4 +62,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.editForm {
+  padding: 1em 0 0 2em;
+}
+
+.submit {
+  padding-top: 2em;
+}
+
+footer {
+  text-align: center;
+}
+</style>
