@@ -22,7 +22,7 @@ Une fois cette sélection faite, les refuges peuvent à leur tour choisir entre 
 
 ## MVP
 
-Le Minimum Valuable Product à la date du 6 janvier 2021 est donc une application web où les utilisateurs se créent un profil en tant qu'adoptants, et peuvent tout de suite choisir parmi les profils d'animaux. L'interface de cette sélection est basée sur l'interface d'applications de rencontre comme Tinder : l'utilisateur voit une carte avec le profil de l'animal, et peut la swiper à droite pour "like", ou à gauche pour "skip".
+Le Minimum Valuable Product (à créer pour le 6 janvier 2021) est donc une application web où les utilisateurs se créent un profil en tant qu'adoptants, et peuvent tout de suite choisir parmi les profils d'animaux. L'interface de cette sélection est basée sur l'interface d'applications de rencontre comme Tinder : l'utilisateur voit une carte avec le profil de l'animal, et peut la swiper à droite pour "like", ou à gauche pour "skip".
 
 Les refuges eux, peuvent s'enregistrer (la vérification de la validité du refuge n'étant pas une fonction nécessaire pour le moment), et créer des profils d'animaux, qui vont être visibles par les adoptants. Ils peuvent aussi consulter la liste de leurs animaux, et voir le profil des utilisateurs qui ont liké un animal en particulier, et donc leurs informations de contact.
 
