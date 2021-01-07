@@ -7,28 +7,28 @@
       <form @submit.prevent="onSignup">
         <label>
           Nom du refuge:
-          <vs-input v-model="nom" type="text" />
+          <vs-input v-model="nom" type="text" required />
         </label>
-        <label> RNA: <vs-input v-model="rna" type="text" /> </label>
+        <label> RNA: <vs-input v-model="rna" type="text" required /> </label>
         <label>
           Nom/prénom du contact:
-          <vs-input v-model="contact" type="text" />
+          <vs-input v-model="contact" type="text" required />
         </label>
         <label>
           Email de contact:
-          <vs-input v-model="email" type="email" />
+          <vs-input v-model="email" type="email" required />
         </label>
         <label>
           Téléphone de contact:
-          <vs-input v-model="telephone" type="tel" />
+          <vs-input v-model="telephone" type="tel" required />
         </label>
         <label>
           Mot de passe:
-          <vs-input v-model="password" type="password" />
+          <vs-input v-model="password" type="password" required />
         </label>
         <label>
           Confirmer le mot de passe:
-          <vs-input type="password" />
+          <vs-input type="password" required />
         </label>
         <vs-input type="submit" value="Continuer" class="registerButton" />
       </form>

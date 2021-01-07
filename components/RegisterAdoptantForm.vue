@@ -7,35 +7,35 @@
       <form @submit.prevent="onSignup">
         <label>
           Nom:
-          <vs-input v-model="nom" type="text" />
+          <vs-input v-model="nom" type="text" required />
         </label>
         <label>
           Photo de profil (url):
-          <vs-input v-model="photo[0].url" type="url" />
+          <vs-input v-model="photo[0].url" type="url" required />
         </label>
         <label>
           Prénom:
-          <vs-input v-model="prenom" type="text" />
+          <vs-input v-model="prenom" type="text" required />
         </label>
         <label>
           Email:
-          <vs-input v-model="email" type="email" />
+          <vs-input v-model="email" type="email" required />
         </label>
         <label>
           Téléphone:
-          <vs-input v-model="telephone" type="tel" />
+          <vs-input v-model="telephone" type="tel" required />
         </label>
         <label>
           Mot de passe:
-          <vs-input v-model="password" type="password" />
+          <vs-input v-model="password" type="password" required />
         </label>
         <label>
           Confirmer le mot de passe:
-          <vs-input type="password" />
+          <vs-input type="password" required />
         </label>
         <label>
           Type d'habitation:
-          <vs-select v-model="habitation" placeholder="Choisir...">
+          <vs-select v-model="habitation" placeholder="Choisir..." required>
             <vs-option label="Appartement" value="appartement">
               Appartement
             </vs-option>
@@ -50,7 +50,11 @@
         </label>
         <label>
           Animaux présents (même espèce que celui que vous voulez adopter?):
-          <vs-select v-model="animauxPresents" placeholder="Choisir...">
+          <vs-select
+            v-model="animauxPresents"
+            placeholder="Choisir..."
+            required
+          >
             <vs-option label="Non" value="non"> Non </vs-option>
             <vs-option label="Oui, même espèce" value="oui same">
               Oui, même espèce
@@ -62,13 +66,13 @@
         </label>
         <label>
           Nombre d'enfants:
-          <vs-input v-model.number="nbEnfants" type="number" />
+          <vs-input v-model.number="nbEnfants" type="number" required />
         </label>
         <div>
           <label>
             Expérience avec les animaux:
             <div>
-              <textarea v-model="experience" />
+              <textarea v-model="experience" required />
             </div>
           </label>
         </div>
@@ -76,11 +80,16 @@
           <label>
             Bio:
             <div>
-              <textarea v-model="bio" />
+              <textarea v-model="bio" required />
             </div>
           </label>
         </div>
-        <vs-input type="submit" value="Continuer" class="registerButton" />
+        <vs-input
+          type="submit"
+          value="Continuer"
+          class="registerButton"
+          required
+        />
       </form>
     </div>
   </div>
